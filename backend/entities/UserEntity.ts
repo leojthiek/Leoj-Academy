@@ -37,8 +37,7 @@ export class User {
   @Column({ default: "user" })
   permission: string
 
-  @Column({default:"male"})
-  sex:string
+
 
   @CreateDateColumn()
   createAt: Date
