@@ -22,20 +22,23 @@ export class User {
   id: string
 
   @Column()
-  @MinLength(3,{message:"Username must be alteast 3 character long"})
+  @MinLength(3, { message: "Username must be alteast 3 character long" })
   username: string
 
   @Column({ unique: true })
-  @IsEmail({},{message:"Invalid email format"})
+  @IsEmail({}, { message: "Invalid email format" })
   email: string
 
   @Column()
-  @MinLength(3,{message:"Password must be atleast 3 character long"})
+  @MinLength(3, { message: "Password must be atleast 3 character long" })
   @Exclude()
   password: string
 
   @Column({ default: "user" })
   permission: string
+
+  @Column({default:"male"})
+  sex:string
 
   @CreateDateColumn()
   createAt: Date
