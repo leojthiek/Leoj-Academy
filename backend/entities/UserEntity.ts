@@ -6,6 +6,7 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BeforeInsert,
+  OneToMany,
 } from "typeorm"
 import { v4 as uuid } from "uuid"
 import bcrypt from "bcrypt"
@@ -36,6 +37,7 @@ export class User {
 
   @Column({ default: "user" })
   permission: string
+
 
 
 
