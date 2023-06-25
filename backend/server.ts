@@ -1,7 +1,10 @@
 import express from "express"
-import userRoute from "./routes/userRoutes"
 import trim from "./middleware/trim"
+
+
 import courseRoute from './routes/courseRoute'
+import userRoute from "./routes/userRoutes"
+
 
 
 const app = express()
