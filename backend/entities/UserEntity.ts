@@ -7,10 +7,12 @@ import {
   UpdateDateColumn,
   BeforeInsert,
   OneToMany,
+  JoinColumn,
 } from "typeorm"
 import { v4 as uuid } from "uuid"
 import bcrypt from "bcrypt"
 import { Exclude, instanceToPlain } from "class-transformer"
+import { Course } from "./courseEntity"
 
 @Entity("users")
 export class User {
@@ -21,6 +23,9 @@ export class User {
   @PrimaryGeneratedColumn("uuid")
   @Exclude()
   id: string
+
+  @OneToMany(() => Course, (course) => course.instructor)
+  courses: Course[]
 
   @Column()
   @MinLength(3, { message: "Username must be alteast 3 character long" })
@@ -37,9 +42,6 @@ export class User {
 
   @Column({ default: "user" })
   permission: string
-
-
-
 
   @CreateDateColumn()
   createAt: Date

@@ -6,9 +6,14 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   BeforeInsert,
+  OneToMany,
+  JoinColumn,
+  ManyToOne,
 } from "typeorm"
 
 import { v4 as uuid } from "uuid"
+import { User } from "./UserEntity"
+import { Chapters } from "./ChapterEntity"
 
 @Entity("courses")
 export class Course {
@@ -18,6 +23,13 @@ export class Course {
 
   @PrimaryGeneratedColumn("uuid")
   id: string
+
+  @OneToMany(()=> Chapters, chapter => chapter.course)
+  chapter:Chapters[]
+
+  @ManyToOne(() => User, (user) => user.courses)
+  @JoinColumn({ name: "instructorId" })
+  instructor: User
 
   @Column()
   @IsNotEmpty()
