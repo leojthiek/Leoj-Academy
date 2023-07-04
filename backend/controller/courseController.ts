@@ -19,8 +19,7 @@ const createCourse = async (req: Request, res: Response) => {
       course_instructor,
       course_image,
       rating,
-      numOfReviews
-      
+      numOfReviews,
     } = req.body
 
     await initializeDataSource()
@@ -33,7 +32,7 @@ const createCourse = async (req: Request, res: Response) => {
       course_instructor,
       course_price,
       rating,
-      numOfReviews
+      numOfReviews,
     })
 
     await AppDataSource.manager.save(course)
@@ -46,15 +45,15 @@ const createCourse = async (req: Request, res: Response) => {
 
 // GET 4 TOP COURSE
 
-const getTopCourse =async (req: Request, res: Response) => {
- await initializeDataSource()
+const getTopCourse = async (req: Request, res: Response) => {
+  await initializeDataSource()
   try {
     const courseRepository = AppDataSource.getRepository(Course)
     const topCourse = await courseRepository.find({
       order: {
         rating: "DESC",
       },
-      take:4,
+      take: 4,
     })
     if (topCourse) {
       res.status(200).json(topCourse)
@@ -69,9 +68,23 @@ const getTopCourse =async (req: Request, res: Response) => {
   }
 }
 
-// GET ALL COURSE BASED ON CATEGORY WISE
+// GET  COURSE DETAILS
 
+const getCourseDetails = async (req: Request, res: Response) => {
+  await initializeDataSource()
+   const courseId = req.params.id
+try {
+   const courseRepository = AppDataSource.getRepository(Course)
+   const courseDetail = await courseRepository.findOne({where:{id:courseId},relations:['chapter','chapter.content']})
 
+   if(!courseDetail){
+    return res.status(400).json({error:'course details not found'})
+   }
+   res.status(200).json({course:courseDetail})
+} catch (error) {
+  console.log('error',error)
+  res.status(400).json({error:'failed to retrive course details'})
+}
+}
 
-
-export { createCourse, getTopCourse}
+export { createCourse, getTopCourse ,getCourseDetails}

@@ -22,10 +22,15 @@ export class Contents {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @ManyToOne(()=> Chapters, chapter => chapter.content )
+  @ManyToOne(() => Chapters, (chapter) => chapter.content)
   @JoinColumn({ name: "chapterId" })
   contentChapter: Chapters
 
+  @Column()
+  title: string
+
+  @Column()
+  description: string
 
   @Column()
   @IsNotEmpty()
