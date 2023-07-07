@@ -1,7 +1,9 @@
 import "./globals.css"
 import { Inter } from "next/font/google"
 import { Providers } from "./redux/provider"
-import 'bootstrap/dist/css/bootstrap.min.css';
+import "bootstrap/dist/css/bootstrap.min.css"
+import Navbar from "./component/navbar/navbar"
+import Footer from "./component/footer/footer"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -16,12 +18,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-      <html lang='en'>
-        <body>
-          <Providers>
-            {children}
-          </Providers>
-        </body>
-      </html>
+    <html lang='en'>
+      <body>
+        <Providers>
+          <header>
+            <Navbar />
+          </header>
+          <main>{children}</main>
+          <footer>
+            <Footer />
+          </footer>
+        </Providers>
+      </body>
+    </html>
   )
 }

@@ -6,6 +6,7 @@ import { Course } from "../entities/courseEntity"
 import { validate } from "class-validator"
 
 import initializeDataSource from "../utils/inititialisedDataSource"
+import { Not } from "typeorm"
 
 //  @ CREATING A COURSE
 
@@ -72,19 +73,56 @@ const getTopCourse = async (req: Request, res: Response) => {
 
 const getCourseDetails = async (req: Request, res: Response) => {
   await initializeDataSource()
-   const courseId = req.params.id
-try {
-   const courseRepository = AppDataSource.getRepository(Course)
-   const courseDetail = await courseRepository.findOne({where:{id:courseId},relations:['chapter','chapter.content']})
+  const courseId = req.params.id
+  try {
+    const courseRepository = AppDataSource.getRepository(Course)
+    const courseDetail = await courseRepository.findOne({
+      where: { id: courseId },
+      relations: ["chapter", "chapter.content"],
+    })
 
-   if(!courseDetail){
-    return res.status(400).json({error:'course details not found'})
-   }
-   res.status(200).json({course:courseDetail})
-} catch (error) {
-  console.log('error',error)
-  res.status(400).json({error:'failed to retrive course details'})
-}
+    if (!courseDetail) {
+      return res.status(400).json({ error: "course details not found" })
+    }
+    res.status(200).json({ course: courseDetail })
+  } catch (error) {
+    console.log("error", error)
+    res.status(400).json({ error: "failed to retrive course details" })
+  }
 }
 
-export { createCourse, getTopCourse ,getCourseDetails}
+// GET COURSE UNDER SPECIFIC INSTRUCTOR
+
+const getCourseWithSameInstructor = async (req: Request, res: Response) => {
+  await initializeDataSource();
+
+  try {
+    const courseId = req.params.id;
+    const courseRepository = AppDataSource.getRepository(Course);
+    const course = await courseRepository.findOne({ where: { id: courseId } });
+
+    if (course) {
+      const instructorName = course.course_instructor;
+      const courseWithSameInstructor = await courseRepository.find({
+        where: {
+          course_instructor: instructorName,
+        },
+        take: 4,
+      });
+
+      if (courseWithSameInstructor) {
+        res.status(200).json(courseWithSameInstructor);
+      } else {
+        res.status(400).json('Courses not found');
+      }
+    } else {
+      res.status(400).json('Course not found');
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ error: 'Something went wrong with the server' });
+  }
+};
+
+
+export { createCourse, getTopCourse, getCourseDetails,getCourseWithSameInstructor }

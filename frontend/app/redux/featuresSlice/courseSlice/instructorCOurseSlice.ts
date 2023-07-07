@@ -2,9 +2,9 @@ import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
 import api from '@/app/api/baseApi'
 
 
- export const getTopCourseAction = createAsyncThunk('course/getTopFourCourse',async(_,{rejectWithValue})=>{
+ export const getInstructorCourseAction = createAsyncThunk('course/getInstructorCourse/:id',async(courseId:string,{rejectWithValue})=>{
     try {
-        const response = await api.get('/api/courses/topCourse')
+        const response = await api.get(`/api/courses/instructor/course/${courseId}`)
         return response.data
     } catch (error:any) {
         if(error.response && error.response.data){
@@ -15,32 +15,32 @@ import api from '@/app/api/baseApi'
     }
 })
 
-  const getTopCourseReducer = createSlice({
-    name:'getTopCourse',
+  const InstructorCourseReducer = createSlice({
+    name:'instructorCourse',
     initialState:{
-        topCourse:[],
+        instructorCourse:[],
         loading:false,
         error:null as unknown
     },
     reducers:{},
     extraReducers: (builder)=>{
         builder
-        .addCase(getTopCourseAction.pending,(state)=>{
+        .addCase(getInstructorCourseAction.pending,(state)=>{
             state.loading=true,
             state.error = null
         })
-        .addCase(getTopCourseAction.fulfilled,(state,action)=>{
+        .addCase(getInstructorCourseAction.fulfilled,(state,action)=>{
             state.loading= false,
-            state.topCourse= action.payload
+            state.instructorCourse= action.payload
         })
-        .addCase(getTopCourseAction.rejected,(state,action)=>{
+        .addCase(getInstructorCourseAction.rejected,(state,action)=>{
             state.loading = false,
-            state.error = action.error
+            state.error = action.error ? action.error.message : 'An error occurred';
         })
     }
     
 })
 
-export default getTopCourseReducer.reducer
+export default InstructorCourseReducer.reducer
 
 

@@ -1,0 +1,29 @@
+.main{
+ width: 16rem;
+ height:17rem;
+}
+.image{
+    width: 16rem;
+}
+.body{
+    color: #000;
+    font-family: Cabin;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height:10px;
+
+}
+.div{
+    background-color: #727975;
+    height: 22rem;
+}
+.head_text{
+    color: #FFF;
+    font-family: Cabin;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding-top: 20px;
+}

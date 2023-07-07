@@ -1,0 +1,11 @@
+
+.text{
+    display: flex;
+    justify-content: center;
+    background-color: #393E46;
+}
+.foot{
+    color: white;
+    font-size: 20px;
+    font-weight: bold;
+}
