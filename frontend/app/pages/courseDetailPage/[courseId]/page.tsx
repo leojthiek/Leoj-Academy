@@ -37,15 +37,16 @@ export default function courseDetail() {
   }, [dispatch, id])
 
   return (
-    <div>
+    <div className={styles.carousel}>
       {loading ? (
         <h2>Loading...</h2>
       ) : error ? (
         <h2>{error}</h2>
       ) : (
-          <Row className={styles.carousel}>
-            <Col md={6} className={styles.left}>
         <Container>
+
+          <Row className={styles.row1} >
+            <Col md={6} className={styles.left}>
 
               {course && (
                 <>
@@ -61,7 +62,6 @@ export default function courseDetail() {
                   </p>
                 </>
               )}
-        </Container>
 
             </Col>
             <Col md={6} className={styles.right}>
@@ -82,6 +82,8 @@ export default function courseDetail() {
               </Card>
             </Col>
           </Row>
+        </Container>
+
       )}
       <Row>
         <Col className={styles.mode}>
