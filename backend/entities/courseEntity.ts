@@ -14,6 +14,7 @@ import {
 import { v4 as uuid } from "uuid"
 import { User } from "./UserEntity"
 import { Chapters } from "./ChapterEntity"
+import { CoursePurchase } from "./CoursePurchaseEntity"
 
 @Entity("courses")
 export class Course {
@@ -30,6 +31,9 @@ export class Course {
   @ManyToOne(() => User, (user) => user.courses)
   @JoinColumn({ name: "instructorId" })
   instructor: User
+
+  @OneToMany(()=> CoursePurchase,(purchase)=> purchase.course)
+  coursePurchase:CoursePurchase[]
 
   @Column()
   @IsNotEmpty()

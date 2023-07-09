@@ -23,12 +23,12 @@ export class CoursePurchase {
   @PrimaryGeneratedColumn("uuid")
   id: string
 
-  @ManyToOne(() => User)
+  @ManyToOne(() => User,(users)=>users.coursePurchase)
   @IsNotEmpty()
   @JoinColumn({name:'userId'})
   user:User
 
-  @ManyToOne(() => Course)
+  @ManyToOne(() => Course, (course)=>course.coursePurchase)
   @IsNotEmpty()
   @JoinColumn({name:'courseId'})
   course:Course

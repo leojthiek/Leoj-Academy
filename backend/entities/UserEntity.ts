@@ -13,6 +13,7 @@ import { v4 as uuid } from "uuid"
 import bcrypt from "bcrypt"
 import { Exclude, instanceToPlain } from "class-transformer"
 import { Course } from "./courseEntity"
+import { CoursePurchase } from "./CoursePurchaseEntity"
 
 @Entity("users")
 export class User {
@@ -26,6 +27,9 @@ export class User {
 
   @OneToMany(() => Course, (course) => course.instructor)
   courses: Course[]
+
+  @OneToMany(()=> CoursePurchase,(purchase)=> purchase.user)
+  coursePurchase: CoursePurchase[]
 
   @Column()
   @MinLength(3, { message: "Username must be alteast 3 character long" })
