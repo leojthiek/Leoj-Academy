@@ -1,20 +1,13 @@
+.logo{
+  width: 100px;
+  height: 40px;
+}
 .main{
-  background-color: #393E46;
-  padding: 0 100px;
+  background-color:#393E46;
 }
-
-.text{
-  text-decoration: none;
+.cartIcon{
   color: white;
-  font-weight: 900;
-
 }
-.right{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding-top: 10px;
-  gap: 30px;
+.more{
+  color: white;
 }
-
-

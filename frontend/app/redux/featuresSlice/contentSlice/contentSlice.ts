@@ -11,8 +11,8 @@ export const fetchVideoUrl = createAsyncThunk(
       console.log(response.data.url)
       return response.data.url
       
-    } catch (error) {
-      throw new Error("Error fetching video URL")
+    } catch (error:any) {
+       throw new Error(error.response.data.error)
     }
   }
 )

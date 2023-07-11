@@ -85,12 +85,14 @@ export default function CourseContent() {
           </Accordion>
         ))}
 
-        {loading && <div>Loading...</div>}
-        {error && <div>Error: {error}</div>}
+       
 
         {showVideo && (
+          
           <div className={styles.videoContainer}>
             <div className={styles.videoWrapper}>
+              {videoLoading && <h1>Loading...</h1>}
+              {videoError && <h2>{videoError}</h2>}
               <ReactPlayer url={url} controls />
               <button className={styles.closeButton} onClick={videoExit}>
                 Close Video
