@@ -1,12 +1,7 @@
 import { Request, Response } from "express"
 import { AppDataSource } from "../data-source"
-import { User } from "../entities/UserEntity"
 import { Course } from "../entities/courseEntity"
 
-import { validate } from "class-validator"
-
-import initializeDataSource from "../utils/inititialisedDataSource"
-import { Not } from "typeorm"
 
 //  @ CREATING A COURSE
 
@@ -23,8 +18,7 @@ const createCourse = async (req: Request, res: Response) => {
       numOfReviews,
     } = req.body
 
-    await initializeDataSource()
-
+  
     const course = new Course({
       course_name,
       course_category,
@@ -47,7 +41,6 @@ const createCourse = async (req: Request, res: Response) => {
 // GET 4 TOP COURSE
 
 const getTopCourse = async (req: Request, res: Response) => {
-  await initializeDataSource()
   try {
     const courseRepository = AppDataSource.getRepository(Course)
     const topCourse = await courseRepository.find({
@@ -72,7 +65,6 @@ const getTopCourse = async (req: Request, res: Response) => {
 // GET  COURSE DETAILS
 
 const getCourseDetails = async (req: Request, res: Response) => {
-  await initializeDataSource()
   const courseId = req.params.id
   try {
     const courseRepository = AppDataSource.getRepository(Course)
@@ -94,7 +86,7 @@ const getCourseDetails = async (req: Request, res: Response) => {
 // GET COURSE UNDER SPECIFIC INSTRUCTOR
 
 const getCourseWithSameInstructor = async (req: Request, res: Response) => {
-  await initializeDataSource();
+
 
   try {
     const courseId = req.params.id;

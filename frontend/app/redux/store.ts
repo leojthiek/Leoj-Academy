@@ -3,6 +3,8 @@ import videoSliceReducer from './featuresSlice/contentSlice/contentSlice'
 import courseDetailReducer from './featuresSlice/courseSlice/courseDetailSlice'
 import getTopCourseReducer from './featuresSlice/courseSlice/topCourseSlice'
 import InstructorCourseReducer from './featuresSlice/courseSlice/instructorCOurseSlice'
+import loginReducer from './featuresSlice/userSlice/loginSlice'
+import registerReducer from './featuresSlice/userSlice/registerSlice'
 
 
 const store = configureStore({
@@ -10,7 +12,9 @@ const store = configureStore({
         videoSlice:videoSliceReducer,
         courseDetail:courseDetailReducer,
         topCourse:getTopCourseReducer,
-        instructorCourse:InstructorCourseReducer
+        instructorCourse:InstructorCourseReducer,
+        login:loginReducer,
+        register:registerReducer
     }
 })
 

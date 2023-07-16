@@ -8,7 +8,6 @@ export const fetchVideoUrl = createAsyncThunk(
       const response = await api.get("/api/content/video", {
         params: { bucketName, keyName },
       })
-      console.log(response.data.url)
       return response.data.url
       
     } catch (error:any) {

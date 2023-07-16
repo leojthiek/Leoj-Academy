@@ -1,6 +1,7 @@
 .logo{
   width: 100px;
   height: 40px;
+  cursor: pointer;
 }
 .main{
   background-color:#393E46;

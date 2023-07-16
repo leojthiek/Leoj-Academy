@@ -16,6 +16,13 @@ import {
 } from "@mui/material"
 import MoreIcon from "@mui/icons-material/MoreVert"
 import { ShoppingCart } from "@mui/icons-material"
+import Link from "next/link"
+import { useSelector } from "react-redux"
+import { RootState } from "@/app/redux/store"
+
+interface User {
+  username: string
+}
 
 const StyleToolbar = styled(Toolbar)({
   display: "flex",
@@ -40,7 +47,7 @@ const NavText = styled("div")(({ theme }) => ({
 
 const Icons = styled(Box)(({ theme }) => ({
   display: "flex",
-  alignItems:'center',
+  alignItems: "center",
   [theme.breakpoints.up("sm")]: {
     display: "none",
   },
@@ -48,58 +55,76 @@ const Icons = styled(Box)(({ theme }) => ({
 
 export default function Navbar() {
   const [open, setOpen] = React.useState(false)
-  const [anchorEl,setAnchorEl] = React.useState<null | HTMLElement>(null)
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setOpen(true);
-    setAnchorEl(event.currentTarget);
-  };
+  const userLogin = useSelector<RootState, { user: User | null }>(
+    (state) => state.login
+  )
+  const { user } = userLogin
+
+  const handleClick = () => {
+    setOpen(true)
+  }
 
   const handleClose = () => {
-    setOpen(false);
-    setAnchorEl(null);
-  };
-
+    setOpen(false)
+  }
 
   return (
     <AppBar position='sticky' className={styles.main}>
       <StyleToolbar>
-        <img src='logo.png' alt='logo' className={styles.logo} />
+        <Link href='/'>
+          <img src='/logo.png' alt='logo' className={styles.logo} />
+        </Link>
         <Search>
           <InputBase placeholder='Search courses...' />
         </Search>
-        
+
         <NavText>
-        <IconButton aria-label='cart'>
+          <IconButton aria-label='cart'>
             <Badge badgeContent={4} color='error'>
               <ShoppingCart className={styles.cartIcon} />
             </Badge>
           </IconButton>
           <Typography>Courses</Typography>
-          <Typography>Sign In</Typography>
+          {user ? (
+            <Link href='#' passHref>
+              <Typography style={{ color: "white" }}>
+                {user.username}
+              </Typography>
+            </Link>
+          ) : (
+            <Link href='/pages/LoginPage' passHref>
+              <Typography style={{ color: "white" }}>Sign In</Typography>
+            </Link>
+          )}
         </NavText>
-        <Icons >
+        <Icons>
           <IconButton aria-label='cart'>
             <Badge badgeContent={4} color='error'>
               <ShoppingCart className={styles.cartIcon} />
             </Badge>
           </IconButton>
           <IconButton onClick={handleClick}>
-          <MoreIcon className={styles.more}/>
+            <MoreIcon className={styles.more} />
           </IconButton>
         </Icons>
       </StyleToolbar>
       <Menu
         open={open}
         onClose={handleClose}
-        anchorEl={anchorEl}
         anchorOrigin={{
           vertical: "top",
           horizontal: "right",
         }}
       >
         <MenuItem>Courses</MenuItem>
-        <MenuItem>Sign In</MenuItem>
+        {user ? (
+          <MenuItem>{user.username}</MenuItem>
+        ) : (
+          <Link href='/pages/LoginPage'>
+            <MenuItem>Sign In</MenuItem>
+          </Link>
+        )}
       </Menu>
     </AppBar>
   )

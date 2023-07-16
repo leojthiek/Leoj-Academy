@@ -1,16 +1,12 @@
 import {createSlice,createAsyncThunk} from '@reduxjs/toolkit'
 import api from '@/app/api/baseApi'
 
-export const getCourseDetailsActions = createAsyncThunk('course/getCourseDetail',async(courseId:string,{rejectWithValue})=>{
+export const getCourseDetailsActions = createAsyncThunk('course/getCourseDetail',async(courseId:string)=>{
     try {
         const response = await api.get(`/api/courses/courseDetail/${courseId}`)
         return response.data.course
     } catch (error:any) {
-        if(error.response && error.response.data){
-            return rejectWithValue(error.response.data)
-        }else{
-            return rejectWithValue({message:'error occur while tring to fetch a data'})
-        }
+       throw new Error(error.response.data.errors)
     }
 })
 
@@ -35,7 +31,7 @@ const courseDetailReducer = createSlice({
         })
         .addCase(getCourseDetailsActions.rejected,(state,action)=>{
             state.loading = false,
-            state.error = action.error
+            state.error = action.error.message
         })
     }
 })

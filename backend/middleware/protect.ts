@@ -10,7 +10,6 @@ interface UserRequest extends Request {
 }
 
 const protect = async (req: UserRequest, res: Response, next: NextFunction) => {
-  await initializeDataSource()
   let token: string
 
   if (

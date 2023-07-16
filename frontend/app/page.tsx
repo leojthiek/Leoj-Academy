@@ -6,9 +6,8 @@ import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "./redux/store"
 import { AppDispatch } from "./redux/store"
 import React from "react"
-import { Card, Button } from "react-bootstrap"
-import Link from "next/link"
-import { useRouter } from "next/navigation" // Import from next/navigation
+// import { Card, Button } from "react-bootstrap"
+// import Link from "next/link"
 
 interface Course {
   id: string
@@ -24,11 +23,10 @@ export default function Home() {
   const dispatch: AppDispatch = useDispatch()
   const topCourses = useSelector((state: RootState) => state.topCourse)
   const { topCourse, error, loading } = topCourses
-  const router = useRouter()
 
   React.useEffect(() => {
     dispatch(getTopCourseAction())
-  }, [])
+  }, [dispatch])
 
   return (
     <main>
@@ -38,7 +36,8 @@ export default function Home() {
         <h3>error</h3>
       ) : (
         <div className={styles.card}>
-          {topCourse &&
+          hello
+          {/* {topCourse &&
             topCourse.map((course: Course) => (
               <Card style={{ width: "16rem" }} key={course.id}>
                 <Card.Img variant='top' src='js.jpg' />
@@ -55,7 +54,7 @@ export default function Home() {
                   </Link>
                 </Card.Body>
               </Card>
-            ))}
+            ))} */}
         </div>
       )}
     </main>

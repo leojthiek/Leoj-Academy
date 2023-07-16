@@ -10,12 +10,12 @@ import {
 } from "@mui/material"
 import React from "react"
 import styles from "./page.module.css"
-import { Google, KeyboardArrowRight, Padding } from "@mui/icons-material"
-import { registerUserAction } from "@/app/redux/featuresSlice/userSlice/registerSlice"
-import { useSelector, useDispatch } from "react-redux"
+import { Google, KeyboardArrowRight } from "@mui/icons-material"
+import Link from "next/link"
+import { useDispatch, useSelector } from "react-redux"
+import { loginAction } from "@/app/redux/featuresSlice/userSlice/loginSlice"
 import { AppDispatch, RootState } from "@/app/redux/store"
 import { useRouter } from "next/navigation"
-import Link from "next/link"
 
 const MainBox = styled("div")(({ theme }) => ({
   display: "flex",
@@ -48,9 +48,9 @@ const SecondBox = styled("div")(({ theme }) => ({
 const Title = styled("div")(({ theme }) => ({}))
 
 const Forms = styled("form")(({ theme }) => ({
-  paddingTop: "14px",
+  paddingTop: "20px",
   paddingLeft: "30px",
-  width: "40rem",
+  width: "30rem",
 }))
 
 const Icons = styled(Box)(({ theme }) => ({
@@ -58,34 +58,32 @@ const Icons = styled(Box)(({ theme }) => ({
   justifyContent: "center",
 }))
 
-export default function RegisterPage() {
-  const [username, setUsername] = React.useState("")
+export default function LoginPage() {
   const [email, setEmail] = React.useState("")
   const [password, setPassword] = React.useState("")
-  const [confirmPassword, setConfirmPassword] = React.useState("")
 
   const dispatch: AppDispatch = useDispatch()
   const router = useRouter()
 
-  const registerUser = useSelector<
+  const loginUser = useSelector<
     RootState,
-    { user: null; error: unknown; loading: boolean }
-  >((state) => state.register)
-  const { user, error, loading } = registerUser
+    { user: null; error: string | unknown; loading: boolean }
+  >((state) => state.login)
+  const { user, error, loading } = loginUser
 
-  React.useEffect(() => {
-    if (user) {
-      router.push("/pages/LoginPage")
+  React.useEffect(()=>{
+    if(user){
+      router.push('/')
     }
-  }, [user, router])
+  },[user,router])
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
     e.preventDefault()
-    dispatch(registerUserAction({ username, email, password }))
+    dispatch(loginAction({email,password}))
   }
-
   return (
     <MainBox>
+      
       <FirstBox>
         <div className={styles.logoContainer}>
           <img
@@ -100,87 +98,72 @@ export default function RegisterPage() {
           <img src='/image1.png' alt='study img' className={styles.image} />
         </div>
         <div className={styles.loginContainer}>
-          <Link href='/pages/LoginPage' passHref>
+          <Link href='/pages/RegisterPage' passHref>
             <Button variant='contained' endIcon={<KeyboardArrowRight />}>
-              Sign in
+              Sign up
             </Button>
           </Link>
         </div>
       </FirstBox>
       <SecondBox>
         <Title>
-          <Typography className={styles.title}>Create an account</Typography>
+          <Typography className={styles.title}>
+            Sign in with your Account
+          </Typography>
         </Title>
         <Typography className={styles.desc}>
-          Fill out the form to get started
+          Fill out the form to sign in
         </Typography>
-
-        {error ? <p style={{ color: "red",paddingLeft:'30px'}}>{error as string}</p> : null}
+        <div className={styles.authImageContainer}>
+          <img src='/auth.png' alt='auth img' className={styles.authImage} />
+        </div>
 
         <Forms onSubmit={handleSubmit}>
+
+        {error ? <p style={{ color: "red",paddingLeft:'30px'}}>{error as string}</p> : null}
+        
+          <Typography className={styles.label}>Enter your email *</Typography>
           <TextField
-            required
-            label='Enter your username'
-            variant='outlined'
-            type='text'
-            fullWidth
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className={styles.textField}
-          />
-          <TextField
-            required
-            label='Enter your email'
-            variant='outlined'
-            type='email'
-            fullWidth
             value={email}
             onChange={(e) => setEmail(e.target.value)}
+            label='example@gmail.com'
+            type='email'
+            fullWidth
             className={styles.textField}
           />
-
+          <Typography className={styles.label}>
+            Enter your password *
+          </Typography>
           <TextField
-            required
-            label='Enter your password'
-            variant='outlined'
             type='password'
             fullWidth
             className={styles.textField}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-
-          <TextField
-            required
-            label='Confirm your password'
-            variant='outlined'
-            type='password'
-            fullWidth
-            className={styles.textField}
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
           <div className={styles.buttonContainer}>
-            <Button className={styles.button} variant='contained' type='submit'>
-              {loading ? <Typography>loading...</Typography> : "Sign up"}
+            <Button className={styles.button} variant='contained' type="submit">
+              {loading ? 'Loading...' : 'Sign in'}
             </Button>
           </div>
+          <Typography
+            style={{
+              textAlign: "center",
+              paddingBottom: "10px",
+              fontWeight: "bold",
+            }}
+          >
+            OR
+          </Typography>
+          <Typography style={{ textAlign: "center" }}>
+            Continue with -
+          </Typography>
+          <Icons>
+            <IconButton>
+              <Google className={styles.googleIcon} />
+            </IconButton>
+          </Icons>
         </Forms>
-        <Typography
-          style={{
-            textAlign: "center",
-            paddingBottom: "10px",
-            fontWeight: "bold",
-          }}
-        >
-          OR
-        </Typography>
-        <Typography style={{ textAlign: "center" }}>Continue with -</Typography>
-        <Icons>
-          <IconButton>
-            <Google className={styles.googleIcon} />
-          </IconButton>
-        </Icons>
       </SecondBox>
     </MainBox>
   )
