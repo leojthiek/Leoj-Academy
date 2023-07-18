@@ -4,7 +4,6 @@ import { User } from "../entities/UserEntity"
 import { validate } from "class-validator"
 import bcrypt from "bcrypt"
 import generateToken from "../utils/generateToken"
-import initializeDataSource from "../utils/inititialisedDataSource"
 
 
 
@@ -14,8 +13,6 @@ import initializeDataSource from "../utils/inititialisedDataSource"
 const registerController = async (req: Request, res: Response) => {
   try {
     const { username, email, password } = req.body
-     
-    await initializeDataSource()
 
     const user = new User({ email, password, username })
 
@@ -33,14 +30,17 @@ const registerController = async (req: Request, res: Response) => {
     const userValidation = await validate(user)
 
     if (userValidation.length > 0) {
-      res.status(400).json({ errors: userValidation })
+      const errors = userValidation.map((error) => error.constraints[Object.keys(error.constraints)[0]]);
+      return res.status(400).json({ errors });
     }
+    
 
     await AppDataSource.manager.save(user)
 
-    return res.json(user)
+    return res.json({user:user})
   } catch (error) {
     console.log(error)
+    return res.status(400).json({errors:'registration failed something wrong with the server'})
   }
 }
 
@@ -51,22 +51,22 @@ const loginController = async(req:Request,res:Response)=>{
     const {email,password}= req.body
 
     try {
-        await initializeDataSource()
-        const userRepository = await AppDataSource.getRepository(User)
+        const userRepository = AppDataSource.getRepository(User)
         const user = await userRepository.findOne({where : {email}})
 
         if(!user){
-            return res.status(400).json({error:"invalid credential"})
+            return res.status(400).json({errors:"invalid credential"})
         }
 
-        const comparePassword = await bcrypt.compare(password,(await user).password)
+        const comparePassword = await bcrypt.compare(password,(user).password)
 
         if(!comparePassword){
             return res.status(400).json({errors:"invalid credential"})
         }
         if(user && comparePassword){
             const token = generateToken(user.id)
-            return res.status(200).json({user,token})
+            const userInfo = {...user,token}
+            return res.status(200).json({userInfo:userInfo})
         }
     } catch (error) {
         console.log(error)

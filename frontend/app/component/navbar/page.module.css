@@ -1,13 +1,23 @@
+.navbar{
+    height: 70px;
+    background-color: #393E46;
+}
+
 .logo{
-  width: 100px;
-  height: 40px;
+    width: 100px;
+    height: 40px;
+    cursor: pointer;
 }
-.main{
-  background-color:#393E46;
+.searchIcon{
+    display: flex;
+    justify-self: end;
 }
-.cartIcon{
-  color: white;
+
+.signInLink{
+    color: white;
+    text-decoration: none;
 }
-.more{
-  color: white;
+
+.drawer{
+    background-color: rgb(36, 35, 35);
 }
