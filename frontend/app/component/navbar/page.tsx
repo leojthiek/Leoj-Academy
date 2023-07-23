@@ -4,6 +4,7 @@ import React from "react"
 import {
   AppBar,
   Box,
+  Button,
   Drawer,
   IconButton,
   InputBase,
@@ -22,7 +23,16 @@ import styles from "./page.module.css"
 import SchoolIcon from "@mui/icons-material/School"
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart"
 import PersonIcon from "@mui/icons-material/Person"
+import LogoutIcon from "@mui/icons-material/Logout"
 import MenuIcon from "@mui/icons-material/Menu"
+import { AppDispatch, RootState } from "@/app/redux/store"
+import { useDispatch, useSelector } from "react-redux"
+import { useRouter } from "next/navigation"
+import { logoutAction } from "@/app/redux/features/userSlice/loginSlice"
+
+interface User {
+  username: string
+}
 
 const StyledToolbar = styled(Toolbar)({
   display: "flex",
@@ -41,9 +51,8 @@ const Search = styled("div")(({ theme }) => ({
   display: "flex",
   backgroundColor: "white",
   alignItems: "center",
-  borderRadius:'10px'
+  borderRadius: "10px",
 }))
-
 
 const FirstBar = styled("div")(({ theme }) => ({
   display: "flex",
@@ -71,6 +80,22 @@ export default function Navbar() {
   const [drawer, setDrawer] = React.useState({
     left: false,
   })
+
+  const dispatch: AppDispatch = useDispatch()
+  const router = useRouter()
+
+  const loginUser = useSelector<RootState, { user: User | null }>(
+    (state) => state.loginUser
+  )
+  const { user } = loginUser
+
+  const handleLogout = () =>{
+    if(user){
+      dispatch(logoutAction())
+      router.push('/pages/loginPage')
+    }
+  }
+
   const toggleDrawer =
     (open: boolean) => (event: React.KeyboardEvent | React.MouseEvent) => {
       if (
@@ -103,7 +128,7 @@ export default function Navbar() {
         <InputBase
           placeholder='Search'
           inputProps={{ "aria-label": "search" }}
-          sx={{ flexGrow: 1, color: "gray",borderBottom:'1px solid gray' }}
+          sx={{ flexGrow: 1, color: "gray", borderBottom: "1px solid gray" }}
           onClick={(event) => event.stopPropagation()}
         />
       </Box>
@@ -124,14 +149,35 @@ export default function Navbar() {
             <ListItemText primary='Cart' />
           </ListItemButton>
         </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <PersonIcon />
-            </ListItemIcon>
-            <ListItemText primary='Sign In' />
-          </ListItemButton>
-        </ListItem>
+        {user ? (
+          <>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <PersonIcon />
+                </ListItemIcon>
+                <ListItemText primary={user.username} />
+              </ListItemButton>
+            </ListItem>{" "}
+            <ListItem disablePadding>
+              <ListItemButton onClick={handleLogout}>
+                <ListItemIcon>
+                  < LogoutIcon/>
+                </ListItemIcon>
+                <ListItemText primary='Sign out' />
+              </ListItemButton>
+            </ListItem>
+          </>
+        ) : (
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <PersonIcon />
+              </ListItemIcon>
+              <ListItemText primary='Sign In' />
+            </ListItemButton>
+          </ListItem>
+        )}
       </List>
     </Box>
   )
@@ -149,16 +195,25 @@ export default function Navbar() {
             <Search>
               <InputBase
                 placeholder='Search courses...'
-                style={{ color: "black",paddingLeft:'10px' }}
+                style={{ color: "black", paddingLeft: "10px" }}
                 className={styles.input}
               />
             </Search>
           </FirstBar>
           <SecondBar>
             <Typography>Courses</Typography>
-            <Link href='/pages/loginPage'>
+           
+              {user ? <><Typography className={styles.signInLink}>{user.username}</Typography>
+              <IconButton onClick={handleLogout} style={{color:'white'}}> 
+                  <LogoutIcon />
+              </IconButton>
+            
+              </>:
+               <Link href='/pages/loginPage'>
               <Typography className={styles.signInLink}>Sign In</Typography>
-            </Link>
+             </Link>
+
+          }
           </SecondBar>
           <SmallScreenRightBar>
             <IconButton onClick={toggleDrawer(true)}>

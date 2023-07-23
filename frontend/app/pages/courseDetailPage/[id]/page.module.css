@@ -1,0 +1,21 @@
+.title{
+    padding-top: 30px;
+    font-size:22px;
+    font-weight: 900;
+}
+
+.reviewUser{
+   padding-top: 10px;
+}
+.username{
+    font-size: 18px;
+    font-weight: 700;
+    padding-top: 20px;
+}
+.comment{
+    padding-top: 10px;
+    font-family: 'Segoe UI',Helvetica,Arial,sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';;
+}
+.btnContainer{
+    padding-top: 20px;
+}

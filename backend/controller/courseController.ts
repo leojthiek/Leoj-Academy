@@ -1,12 +1,8 @@
 import { Request, Response } from "express"
 import { AppDataSource } from "../data-source"
-import { User } from "../entities/UserEntity"
 import { Course } from "../entities/courseEntity"
 
-import { validate } from "class-validator"
 
-import initializeDataSource from "../utils/inititialisedDataSource"
-import { Not } from "typeorm"
 
 //  @ CREATING A COURSE
 
@@ -23,7 +19,6 @@ const createCourse = async (req: Request, res: Response) => {
       numOfReviews,
     } = req.body
 
-    await initializeDataSource()
 
     const course = new Course({
       course_name,
@@ -47,7 +42,6 @@ const createCourse = async (req: Request, res: Response) => {
 // GET 4 TOP COURSE
 
 const getTopCourse = async (req: Request, res: Response) => {
-  await initializeDataSource()
   try {
     const courseRepository = AppDataSource.getRepository(Course)
     const topCourse = await courseRepository.find({
@@ -57,7 +51,7 @@ const getTopCourse = async (req: Request, res: Response) => {
       take: 4,
     })
     if (topCourse) {
-      res.status(200).json(topCourse)
+      res.status(200).json({course:topCourse})
     } else {
       res.status(400).json({ errors: "courses not found" })
     }
@@ -72,7 +66,6 @@ const getTopCourse = async (req: Request, res: Response) => {
 // GET  COURSE DETAILS
 
 const getCourseDetails = async (req: Request, res: Response) => {
-  await initializeDataSource()
   const courseId = req.params.id
   try {
     const courseRepository = AppDataSource.getRepository(Course)
@@ -82,19 +75,18 @@ const getCourseDetails = async (req: Request, res: Response) => {
     })
 
     if (!courseDetail) {
-      return res.status(400).json({ error: "course details not found" })
+      return res.status(400).json({ errors: "course details not found" })
     }
     res.status(200).json({ course: courseDetail })
   } catch (error) {
     console.log("error", error)
-    res.status(400).json({ error: "failed to retrive course details" })
+    res.status(400).json({ errors: "failed to retrive course details" })
   }
 }
 
 // GET COURSE UNDER SPECIFIC INSTRUCTOR
 
 const getCourseWithSameInstructor = async (req: Request, res: Response) => {
-  await initializeDataSource();
 
   try {
     const courseId = req.params.id;
@@ -111,12 +103,12 @@ const getCourseWithSameInstructor = async (req: Request, res: Response) => {
       });
 
       if (courseWithSameInstructor) {
-        res.status(200).json(courseWithSameInstructor);
+        res.status(200).json({instructorCourse:courseWithSameInstructor});
       } else {
-        res.status(400).json('Courses not found');
+        res.status(400).json({errors:'Course not found'});
       }
     } else {
-      res.status(400).json('Course not found');
+      res.status(400).json({errors:'Course not found'});
     }
   } catch (error) {
     console.log(error);

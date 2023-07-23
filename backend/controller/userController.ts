@@ -65,7 +65,8 @@ const loginController = async(req:Request,res:Response)=>{
         }
         if(user && comparePassword){
             const token = generateToken(user.id)
-            const userInfo = {...user,token}
+             const {id,email,permission,username} = user
+            const userInfo = {id,email,permission,username,token}
             return res.status(200).json({userInfo:userInfo})
         }
     } catch (error) {
