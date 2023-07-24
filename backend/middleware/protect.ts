@@ -10,7 +10,6 @@ interface UserRequest extends Request {
 }
 
 const protect = async (req: UserRequest, res: Response, next: NextFunction) => {
-  await initializeDataSource()
   let token: string
 
   if (
@@ -29,10 +28,10 @@ const protect = async (req: UserRequest, res: Response, next: NextFunction) => {
       }
     } catch (error) {
       console.log(error)
-      return res.status(400).json({ error: "Unauthorized, token not found" })
+      return res.status(400).json({ errors: "Unauthorized, token not found" })
     }
   } else {
-    return res.status(400).json({ error: "Unauthorized, plese sign in to continue" })
+    return res.status(400).json({ errors: "Unauthorized, plese sign in to continue" })
   }
 
   next()

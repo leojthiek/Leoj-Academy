@@ -4,6 +4,7 @@ import loginUserReducer from './features/userSlice/loginSlice'
 import getTopCourseReducer from './features/courseSlice/topCourseSlice'
 import courseDetailReducer from './features/courseSlice/courseDetailSlice'
 import instructorCourseReducer from './features/courseSlice/instructorSlice'
+import videoUrlReducer from './features/contentSlice/contentSlice'
 
 
 
@@ -14,6 +15,7 @@ const store = configureStore({
         topCourse:getTopCourseReducer,
         courseDetail:courseDetailReducer,
         instructorCourse:instructorCourseReducer,
+        videoUrl:videoUrlReducer,
     }
 
 })

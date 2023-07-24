@@ -28,6 +28,7 @@ const Review = styled("div")(({ theme }) => ({
 }))
 
 interface Course {
+  id:string,
   course_name: string
   course_description: string
   course_price: number
