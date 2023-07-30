@@ -11,7 +11,7 @@ import {
 import React from "react"
 import styles from "./page.module.css"
 import { Google, KeyboardArrowRight, Padding } from "@mui/icons-material"
-import { registerUserAction } from "@/app/redux/featuresSlice/userSlice/registerSlice"
+import { registerAction } from "@/app/redux/features/userSlice/registerSlice"
 import { useSelector, useDispatch } from "react-redux"
 import { AppDispatch, RootState } from "@/app/redux/store"
 import { useRouter } from "next/navigation"
@@ -70,7 +70,7 @@ export default function RegisterPage() {
   const registerUser = useSelector<
     RootState,
     { user: null; error: unknown; loading: boolean }
-  >((state) => state.register)
+  >((state) => state.registerUser)
   const { user, error, loading } = registerUser
 
   React.useEffect(() => {
@@ -81,7 +81,7 @@ export default function RegisterPage() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(registerUserAction({ username, email, password }))
+    dispatch(registerAction({ username, email, password }))
   }
 
   return (

@@ -1,13 +1,4 @@
 import "./globals.css"
-<<<<<<< HEAD
-import { Providers } from "./redux/provider"
-// import Footer from "./component/footer/footer"
-import dynamic from "next/dynamic"
-
-
-const Navbar = dynamic(()=> import('./component/navbar/navbar'))
-
-=======
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { Providers } from "./redux/provider"
@@ -15,7 +6,6 @@ import dynamic from "next/dynamic"
 
 const Navbar = dynamic(()=>import('./component/navbar/page'))
 const Footer = dynamic(()=>import("./component/footer/page"))
->>>>>>> branch
 
 
 export const metadata: Metadata = {
@@ -32,21 +22,15 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <body className={inter.className}>
+      <body>
         <Providers>
           <header>
             <Navbar />
           </header>
           <main>{children}</main>
-<<<<<<< HEAD
-          {/* <footer>
-            <Footer />
-          </footer> */}
-=======
           <footer>
             <Footer/>
           </footer>
->>>>>>> branch
         </Providers>
       </body>
     </html>
