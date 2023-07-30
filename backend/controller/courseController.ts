@@ -1,7 +1,15 @@
 import { Request, Response } from "express"
 import { AppDataSource } from "../data-source"
 import { Course } from "../entities/courseEntity"
+import { User } from "../entities/UserEntity"
+import { CoursePurchase } from "../entities/CoursePurchaseEntity"
 
+<<<<<<< HEAD
+=======
+interface userRequest extends Request{
+  user:User
+}
+>>>>>>> branch
 
 //  @ CREATING A COURSE
 
@@ -18,7 +26,11 @@ const createCourse = async (req: Request, res: Response) => {
       numOfReviews,
     } = req.body
 
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> branch
     const course = new Course({
       course_name,
       course_category,
@@ -50,7 +62,7 @@ const getTopCourse = async (req: Request, res: Response) => {
       take: 4,
     })
     if (topCourse) {
-      res.status(200).json(topCourse)
+      res.status(200).json({course:topCourse})
     } else {
       res.status(400).json({ errors: "courses not found" })
     }
@@ -74,19 +86,54 @@ const getCourseDetails = async (req: Request, res: Response) => {
     })
 
     if (!courseDetail) {
-      return res.status(400).json({ error: "course details not found" })
+      return res.status(400).json({ errors: "course details not found" })
     }
+
     res.status(200).json({ course: courseDetail })
   } catch (error) {
     console.log("error", error)
-    res.status(400).json({ error: "failed to retrive course details" })
+    res.status(400).json({ errors: "failed to retrive course details" })
+  }
+}
+
+const getCoursePurchaseDetail = async (req: userRequest, res: Response) => {
+  const userId = req.user.id
+  const courseId = req.params.id
+  try {
+    const courseRepository = AppDataSource.getRepository(Course)
+    const courseDetail = await courseRepository.findOne({
+      where: { id: courseId },
+      relations: ["chapter", "chapter.content"],
+    })
+
+    if (!courseDetail) {
+      return res.status(400).json({ errors: "course details not found" })
+    }
+
+    const  coursePurchaseRepo = AppDataSource.getRepository(CoursePurchase)
+    const coursePurchase = await coursePurchaseRepo.findOne({where:{user:{id:userId},course:{id:courseId},isPaid:true}})
+
+    if(coursePurchase){
+      const course = {courseDetail,coursePurchase}
+      res.status(200).json({course:course})
+    }else{
+      res.status(400).json({errors:'course not purchase'})
+    }
+
+  
+  } catch (error) {
+    console.log("error", error)
+    res.status(400).json({ errors: "failed to retrive course details" })
   }
 }
 
 // GET COURSE UNDER SPECIFIC INSTRUCTOR
 
 const getCourseWithSameInstructor = async (req: Request, res: Response) => {
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch
 
   try {
     const courseId = req.params.id;
@@ -99,16 +146,19 @@ const getCourseWithSameInstructor = async (req: Request, res: Response) => {
         where: {
           course_instructor: instructorName,
         },
+        order:{
+          rating:'DESC'
+        },
         take: 4,
       });
 
       if (courseWithSameInstructor) {
-        res.status(200).json(courseWithSameInstructor);
+        res.status(200).json({instructorCourse:courseWithSameInstructor});
       } else {
-        res.status(400).json('Courses not found');
+        res.status(400).json({errors:'Course not found'});
       }
     } else {
-      res.status(400).json('Course not found');
+      res.status(400).json({errors:'Course not found'});
     }
   } catch (error) {
     console.log(error);
@@ -116,5 +166,62 @@ const getCourseWithSameInstructor = async (req: Request, res: Response) => {
   }
 };
 
+// GET TOP RATED 4 COURSE WITH SAME CATEGORY  
 
-export { createCourse, getTopCourse, getCourseDetails,getCourseWithSameInstructor }
+const getCourseWithSameCategory = async (req: Request, res: Response) => {
+
+  try {
+    const courseId = req.params.id;
+    const courseRepository = AppDataSource.getRepository(Course);
+    const course = await courseRepository.findOne({ where: { id: courseId } });
+
+    if (course) {
+      const categoryName = course.course_category;
+      const courseWithSameCategory = await courseRepository.find({
+        where: {
+          course_category: categoryName,
+        },
+        order:{
+          rating:'DESC'
+        },
+        take: 4,
+      });
+
+      if (courseWithSameCategory) {
+        res.status(200).json({courseCategory:courseWithSameCategory});
+      } else {
+        res.status(400).json({errors:'Course not found'});
+      }
+    } else {
+      res.status(400).json({errors:'Course not found'});
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(400).json({ errors: 'Something went wrong with the server' });
+  }
+};
+
+// const getCoursePurchase = async (req: userRequest, res: Response) => {
+
+//   try {
+//     const courseId = req.params.id;
+//     const userId= req.user.id
+
+//     const coursePurchaseRepo = AppDataSource.getRepository(CoursePurchase);
+//     const course = await coursePurchaseRepo.findOne({ where: {user:{id:userId},course:{id:courseId},isPaid:true}});
+
+//     if(!course){
+//       return res.status(200).json({errors:'course not purchase'})
+//     }
+
+//     res.status(200).json({course:course})
+
+    
+//   } catch (error) {
+//     console.log(error);
+//     res.status(400).json({ errors: 'Something went wrong with the server,while fetching coursePurchase' });
+//   }
+// };
+
+
+export { createCourse, getTopCourse, getCourseDetails,getCourseWithSameInstructor,getCourseWithSameCategory,getCoursePurchaseDetail}

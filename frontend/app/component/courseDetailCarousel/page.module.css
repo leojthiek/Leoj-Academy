@@ -1,0 +1,47 @@
+.main{
+    height:auto;
+    background-color: rgb(54, 52, 52);
+    color: white;
+}
+.item{
+    font-weight:700;
+}
+
+.span{
+    font-weight: 500;
+    font-family: secular one;
+}
+
+
+.cardSpan{
+    font-weight: 700;
+    font-size: 18px;
+}
+.cardText{
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: gray;
+}
+.cardTextLast{
+    text-align: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: gray;
+    padding-bottom: 10px;
+}
+.cardBtn{
+    width: 90%;
+}
+
+.btnContainer{
+    display: flex;
+    justify-content: center;
+    padding-bottom: 10px;
+}
+.desc{
+    font-family: secular one ;
+    line-height: 1.3rem;
+    padding-bottom: 5px;
+}
+

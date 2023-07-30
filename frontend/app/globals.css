@@ -1,9 +1,8 @@
-body{
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
+*{
+  margin: 0;
+  padding: 0;
 }
 
 main{
-    min-height: 90vh;
+  min-height: 90vh;
 }

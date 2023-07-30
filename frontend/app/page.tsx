@@ -1,31 +1,60 @@
 "use client"
 
-import styles from "./page.module.css"
-import { getTopCourseAction } from "./redux/featuresSlice/courseSlice/topCourseSlice"
-import { useSelector, useDispatch } from "react-redux"
-import { RootState } from "./redux/store"
-import { AppDispatch } from "./redux/store"
+import {
+  Box,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  Container,
+  Grid,
+  Skeleton,
+  Typography,
+  styled,
+} from "@mui/material"
 import React from "react"
+<<<<<<< HEAD
 // import { Card, Button } from "react-bootstrap"
 // import Link from "next/link"
+=======
+import styles from "./page.module.css"
+import { useDispatch,useSelector } from "react-redux"
+import { getTopCourseAction } from "./redux/features/courseSlice/topCourseSlice"
+import { AppDispatch, RootState } from "./redux/store"
+import Link from "next/link"
+>>>>>>> branch
 
 interface Course {
-  id: string
-  course_name: string
-  course_description: string
-  course_price: number
-  course_instructor: number
-  numOfReviews: number
-  rating: number
+   id:string,
+   course_name:string,
+   course_price:number,
+   course_instructor:string,
+   rating:string
 }
 
+
+const Title = styled(Typography)(({ theme }) => ({
+  fontSize: "22px",
+  fontWeight: "900",
+  paddingBottom:'20px'
+}))
+
 export default function Home() {
+<<<<<<< HEAD
   const dispatch: AppDispatch = useDispatch()
   const topCourses = useSelector((state: RootState) => state.topCourse)
   const { topCourse, error, loading } = topCourses
+=======
+  
+  const dispatch:AppDispatch=useDispatch()
+>>>>>>> branch
 
-  React.useEffect(() => {
+  const topCourse = useSelector((state:RootState)=>state.topCourse)
+  const {course,error,loading} = topCourse
+
+  React.useEffect(()=>{
     dispatch(getTopCourseAction())
+<<<<<<< HEAD
   }, [dispatch])
 
   return (
@@ -48,15 +77,72 @@ export default function Home() {
                   <Card.Text>{course.rating}</Card.Text>
                   <Card.Text>{course.course_instructor}</Card.Text>
                   <Card.Text>{course.course_price}</Card.Text>
+=======
+  },[dispatch])
+  return (
+    <div className={styles.main}>
+      
+      <Container>
+        {loading ? (<Skeleton variant="text" sx={{fontSize:'22px'}}/>) : error ? (<p>{error as string}</p>) : 
+        <>
+        <Title>
+          Most Rated course by <span className={styles.instructor}>Student</span> :
+        </Title>
+>>>>>>> branch
 
-                  <Link href={`/pages/courseDetailPage/${course.id}`}>
-                    <Button variant='primary'>Go somewhere</Button>
-                  </Link>
-                </Card.Body>
+        <Box>
+       
+          <Grid container>
+          {course.map((cours:Course)=>(
+            
+            <Grid item md={3} key={cours.id}>
+              <Link href={`/pages/courseDetailPage/${cours.id}`} style={{textDecoration:'none'}}>
+              <Card sx={{ maxWidth:250 }}>
+                <CardActionArea>
+                 
+                    
+                    <CardMedia
+                    component='img'
+                    height='140'
+                    image='/pyton.jpg'
+                    alt='green iguana'
+                  />
+                  <CardContent>
+                    <Typography className={styles.cardTitle} >
+                       {cours.course_name}
+                    </Typography>
+                    <Typography className={styles.cardInstructor}>
+                     {cours.course_instructor}
+                    </Typography>
+                    <Typography className={styles.cardRating}>
+                     xxxx (345)
+                    </Typography>
+                    <Typography className={styles.cardPrice}>
+                    &#x20B9; {cours.course_price}
+                    </Typography>
+                  </CardContent>
+                  
+                
+                  
+                </CardActionArea>
               </Card>
+<<<<<<< HEAD
             ))} */}
         </div>
       )}
     </main>
+=======
+            </Link>
+
+            </Grid>
+            ))}
+
+          </Grid>
+        </Box>
+      </>
+}
+      </Container>
+    </div>
+>>>>>>> branch
   )
 }

@@ -6,6 +6,6 @@ import { protect } from '../middleware/protect'
 const router = express.Router()
 
 
-router.route('/video').get(getVideoContent)
+router.route('/video/:id').get(protect,getVideoContent)
 
 export default router

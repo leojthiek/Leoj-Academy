@@ -22,13 +22,13 @@ const getVideoContent = async (req: UserRequest, res: Response) => {
   try {
     const { bucketName, keyName } = req.query;
     const userId = req.user?.id;
-    // const courseId = req.params.id;
+    const courseId = req.params.id;
 
     const coursePurchaseRepo = AppDataSource.getRepository(CoursePurchase);
     const coursePurchase = await coursePurchaseRepo.findOne({
       where: {
         user: { id: userId },
-        // course: { id: String(courseId) },
+        course: { id: String(courseId) },
         isPaid: true,
       },
     });
@@ -51,14 +51,14 @@ const getVideoContent = async (req: UserRequest, res: Response) => {
         res.status(200).json({ url: signedUrl });
       } catch (error) {
         console.log(error);
-        res.status(500).json({ error: "Internal Server Error" });
+        res.status(500).json({ errors: "Internal Server Error" });
       }
     } else {
-      res.status(403).json({ error: "Unauthorized. Please purchase the course." });
+      res.status(403).json({ errors: "Unauthorized. Please purchase the course." });
     }
   } catch (error) {
     console.error("Error generating signed URL for video:", error);
-    res.status(500).json({ error: "Internal Server Error" });
+    res.status(500).json({ errors: "Internal Server Error" });
   }
 };
 
