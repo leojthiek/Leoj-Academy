@@ -23,7 +23,6 @@ const createCourse = async (req: Request, res: Response) => {
       numOfReviews,
     } = req.body
 
-
     const course = new Course({
       course_name,
       course_category,
