@@ -4,15 +4,9 @@
 }
 
 .logo{
-<<<<<<< HEAD
-  width: 100px;
-  height: 40px;
-  cursor: pointer;
-=======
     width: 100px;
     height: 40px;
     cursor: pointer;
->>>>>>> branch
 }
 .searchIcon{
     display: flex;

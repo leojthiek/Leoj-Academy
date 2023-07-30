@@ -4,12 +4,9 @@ import { Course } from "../entities/courseEntity"
 import { User } from "../entities/UserEntity"
 import { CoursePurchase } from "../entities/CoursePurchaseEntity"
 
-<<<<<<< HEAD
-=======
 interface userRequest extends Request{
   user:User
 }
->>>>>>> branch
 
 //  @ CREATING A COURSE
 
@@ -26,11 +23,6 @@ const createCourse = async (req: Request, res: Response) => {
       numOfReviews,
     } = req.body
 
-<<<<<<< HEAD
-  
-=======
-
->>>>>>> branch
     const course = new Course({
       course_name,
       course_category,
@@ -130,10 +122,6 @@ const getCoursePurchaseDetail = async (req: userRequest, res: Response) => {
 // GET COURSE UNDER SPECIFIC INSTRUCTOR
 
 const getCourseWithSameInstructor = async (req: Request, res: Response) => {
-<<<<<<< HEAD
-
-=======
->>>>>>> branch
 
   try {
     const courseId = req.params.id;
