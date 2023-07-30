@@ -58,7 +58,7 @@ export default function InstructorCourse() {
           <Grid container>
             
             <Grid item md={3}>
-              <Card sx={{ maxWidth: 250 }}>
+              <Card sx={{width:250,height:300,backgroundColor:'#f2fde4'}}>
                 <CardActionArea>
                   <CardMedia
                     component='img'

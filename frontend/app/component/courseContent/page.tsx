@@ -3,7 +3,6 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-  Box,
   Container,
   Typography,
 } from "@mui/material"
@@ -12,8 +11,7 @@ import React from "react"
 import styles from "./page.module.css"
 import { AppDispatch, RootState } from "@/app/redux/store"
 import { useDispatch, useSelector } from "react-redux"
-import { fetchVideoUrl } from "@/app/redux/features/contentSlice/contentSlice"
-import ReactPlayer from "react-player"
+import Link from "next/link"
 
 interface Course {
   id: string
@@ -42,7 +40,6 @@ interface Chapter {
 }
 
 export default function CourseContent() {
-  const [showVideo, setShowVideo] = React.useState(false)
   const dispatch: AppDispatch = useDispatch()
 
   const courseDetails = useSelector<
@@ -57,26 +54,6 @@ export default function CourseContent() {
   >((state) => state.videoUrl)
   const { url, error: videoError, loading: videoLoasing } = fetchVideo
 
-  const handleVideoShow = (videoUrl: string) => {
-    if (course?.id) {
-      try {
-        dispatch(
-          fetchVideoUrl({
-            id: course?.id,
-            bucketName: "leoj_academy",
-            keyName: videoUrl,
-          })
-        )
-        setShowVideo(true)
-      } catch (error) {
-        console.log(error)
-      }
-    }
-  }
-
-  const videoExit = () => {
-    setShowVideo(false)
-  }
 
   return (
     <div className={styles.main}>
@@ -97,32 +74,17 @@ export default function CourseContent() {
             </AccordionSummary>
             {cours.content.map((conten) => (
               <AccordionDetails key={conten.id}>
-                <AccordionSummary
-                  onClick={() => handleVideoShow(conten.videoURL)}
-                >
+                  <Link href={'/pages/videoPlayingPage'}>
                   <Typography className={styles.contentName}>
                     {conten.title}
                   </Typography>
-                </AccordionSummary>
+                  </Link>
               </AccordionDetails>
             ))}
           </Accordion>
         ))}
       </Container>
-      {showVideo && (
-        <div className={styles.videoContainer}>
-          <div className={styles.videoWrapper}>
-            {videoLoasing && <h1>Loading...</h1>}
-            {videoError && (
-              <h5 style={{ color: "white" }}>{videoError as string}</h5>
-            )}
-            <ReactPlayer url={url} controls />
-            <button className={styles.closeButton} onClick={videoExit}>
-              Close Video
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   )
 }
+

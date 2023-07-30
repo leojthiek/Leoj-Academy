@@ -29,6 +29,7 @@ import { AppDispatch, RootState } from "@/app/redux/store"
 import { useDispatch, useSelector } from "react-redux"
 import { useRouter } from "next/navigation"
 import { logoutAction } from "@/app/redux/features/userSlice/loginSlice"
+import { resetCourse } from "@/app/redux/features/courseSlice/coursePuchaseDetailSlice"
 
 interface User {
   username: string
@@ -81,6 +82,8 @@ export default function Navbar() {
     left: false,
   })
 
+
+
   const dispatch: AppDispatch = useDispatch()
   const router = useRouter()
 
@@ -89,9 +92,11 @@ export default function Navbar() {
   )
   const { user } = loginUser
 
+
   const handleLogout = () =>{
     if(user){
       dispatch(logoutAction())
+      dispatch(resetCourse())
       router.push('/pages/loginPage')
     }
   }

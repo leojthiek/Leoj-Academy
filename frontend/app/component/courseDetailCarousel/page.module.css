@@ -9,6 +9,7 @@
 
 .span{
     font-weight: 500;
+    font-family: secular one;
 }
 
 
@@ -37,5 +38,10 @@
     display: flex;
     justify-content: center;
     padding-bottom: 10px;
+}
+.desc{
+    font-family: secular one ;
+    line-height: 1.3rem;
+    padding-bottom: 5px;
 }
 

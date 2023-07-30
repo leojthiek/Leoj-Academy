@@ -31,11 +31,15 @@
     justify-content: center;
     align-items: center;
     z-index: 9999;
+    overflow-y: auto;
+    
   }
   
   .videoWrapper {
     position: relative;
-    max-width: 800px;
+    width: 750px;
+    background-color: black;
+    top:70px
   }
   
   .videoWrapper video {
@@ -47,7 +51,62 @@
     top: 10px;
     right: 10px;
     padding: 10px;
-    background-color: #fff;
     border: none;
     cursor: pointer;
+    color: #fff;
   }
+  .preview{
+    font-family:secular one;
+    font-weight: 700;
+    padding-top: 30px;
+    font-size: 18px;
+    color: rgb(186, 185, 185);
+  }
+  .courseTitle{
+    color: white;
+    font-family:secular one;
+    font-weight: 900;
+    padding-top: 10px;
+    font-size: 29px;
+    padding-bottom: 50px;
+  }
+  .mainVideoContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+    width: 700px;
+    background-color: gray;
+  }
+  .videoCourseTitle{
+    color: gray;
+    font-family:secular one;
+    font-weight: 900;
+    padding-top: 30px;
+    font-size: 18px;
+    padding-bottom: 30px;
+  }
+
+  .videoContentTitle{
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    font-family: secular one;
+    padding-bottom: 16px;
+    padding-top: 8px;
+  }
+
+  .contentContainer{
+    padding-bottom: 50px;
+
+  }
+
+  .contentStyle{
+    display: flex;
+    gap: 9px;
+    cursor: pointer;
+  }
+  .lockIcon{
+    font-size: 800px;
+  }
+  

@@ -5,6 +5,8 @@ import getTopCourseReducer from './features/courseSlice/topCourseSlice'
 import courseDetailReducer from './features/courseSlice/courseDetailSlice'
 import instructorCourseReducer from './features/courseSlice/instructorSlice'
 import videoUrlReducer from './features/contentSlice/contentSlice'
+import sameCategoryReducer from './features/courseSlice/sameCategoryCourse'
+import coursePurchaseDetailReducer from './features/courseSlice/coursePuchaseDetailSlice'
 
 
 
@@ -16,6 +18,8 @@ const store = configureStore({
         courseDetail:courseDetailReducer,
         instructorCourse:instructorCourseReducer,
         videoUrl:videoUrlReducer,
+        sameCategory:sameCategoryReducer,
+        coursePurchaseDetail:coursePurchaseDetailReducer,
     }
 
 })

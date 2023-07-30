@@ -48,6 +48,8 @@ const SecondBox = styled(Grid)(({ theme }) => ({
 const CourseName = styled(Typography)(({ theme }) => ({
   fontSize: "35px",
   fontWeight: "900",
+  fontFamily:'secular one',
+  paddingBottom:'10px'
 }))
 
 
@@ -62,7 +64,7 @@ export default function CourseDetailCarousel() {
         <Grid container>
           <FirstBox item md={8}>
             <CourseName>{course && course.course_name}</CourseName>
-            <Typography className={styles.span}>
+            <Typography className={styles.desc}>
               {course && course.course_description}
             </Typography>
             <Typography className={styles.item}>

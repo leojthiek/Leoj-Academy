@@ -1,6 +1,7 @@
 .main{
     padding-top: 50px;
     padding-bottom: 50px;
+    text-transform: capitalize;
 }
 
 .instructor{
@@ -14,7 +15,7 @@
     color:black;
     font-family: anton;
     font-weight: 800;
-
+   text-transform: capitalize;
 }
 .cardInstructor{
     font-size: .90rem;
@@ -22,16 +23,19 @@
     font-weight: 800;
     color: gray;
     padding-top: 8px;
+    text-transform: capitalize;
 }
 
 .cardRating{
     font-weight:800;
     font-family: anton;
     font-size: .90rem;
+    text-transform: capitalize;
 }
 
 .cardPrice{
     font-weight:800;
     font-family: anton;
     font-size: 1.3rem;
+    text-transform: capitalize;
 }

@@ -27,7 +27,7 @@ const videoUrlReducer = createSlice({
   initialState: {
     url:"",
     loading: false,
-    error: null as string | unknown,
+    error: null as string | unknown
   },
   reducers: {},
   extraReducers: (builder) => {
