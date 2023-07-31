@@ -36,6 +36,7 @@ export class Contents {
   @IsNotEmpty()
   videoURL: string
 
+
   @CreateDateColumn()
   createAt: Date
 

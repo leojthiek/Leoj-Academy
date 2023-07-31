@@ -8,7 +8,6 @@ export default async function initializeDataSource() {
     try {
       await AppDataSource.initialize();
       initialized = true;
-      console.log("Data source initialized");
     } catch (error) {
       console.error("Failed to initialize data source:", error);
       throw error;

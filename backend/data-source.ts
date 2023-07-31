@@ -13,6 +13,7 @@ export const AppDataSource = new DataSource({
     username: "joel",
     password: "rokiemlo",
     database: "leoj_academy",
+    cache:false,
     synchronize: true,
     logging: false,
     entities: [User,Course,Chapters,Contents,CoursePurchase],
