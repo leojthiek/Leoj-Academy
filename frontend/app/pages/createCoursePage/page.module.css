@@ -1,0 +1,27 @@
+.pageTitleContainer{
+    margin-top: 40px;
+    height:60px;
+    display: flex;
+    align-items: center;
+}
+
+.pageTitle{
+    font-size: 20px;
+    font-weight: 800;
+    font-family:secular one;
+    padding-left: 30px;
+}
+.textField{
+    font-size: 10px;
+}
+.inputTitle{
+    padding-bottom: 5px;
+    font-size: 16px;
+    font-family: sans-serif;
+    font-weight: 800;
+}
+.rightBottomTitle{
+    font-size: 20px;
+    font-family: sans-serif;
+    font-weight: 800;
+}

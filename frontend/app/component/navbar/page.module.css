@@ -21,3 +21,17 @@
 .drawer{
     background-color: rgb(36, 35, 35);
 }
+.navUser{
+    font-size: 16px;
+    font-weight: 600;
+    font-family:secular one;
+    cursor: pointer;
+}
+.navCourse{
+    font-size: 16px;
+    font-weight: 600;
+    font-family:secular one;
+    cursor: pointer;
+    color: #fff;
+    text-align: center;
+}

@@ -3,6 +3,7 @@
 import React from "react"
 import {
   AppBar,
+  Avatar,
   Box,
   Button,
   Drawer,
@@ -206,9 +207,18 @@ export default function Navbar() {
             </Search>
           </FirstBar>
           <SecondBar>
-            <Typography>Courses</Typography>
+            <Typography className={styles.navCourse}>Courses</Typography>
+            <Link href={'/pages/dashboardPage'} style={{textDecoration:'none'}}>
+            <Typography className={styles.navCourse}>Dashboard</Typography>
+            </Link>
+
            
-              {user ? <><Typography className={styles.signInLink}>{user.username}</Typography>
+              {user ? <>
+              <div style={{display:'flex',alignItems:'center',gap:'5px'}}>
+                <Avatar style={{width:'25px',height:'25px'}}/>
+              <Typography className={styles.navUser}>{user.username}</Typography>
+              </div>
+
               <IconButton onClick={handleLogout} style={{color:'white'}}> 
                   <LogoutIcon />
               </IconButton>
