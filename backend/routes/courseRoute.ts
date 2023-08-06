@@ -1,5 +1,5 @@
 import express from "express";
-import { createChaters, createCourse, getChapterDetails, getCourseDetails, getCoursePurchaseDetail, getCourseWithSameCategory, getCourseWithSameInstructor, getOneLatestCreatedCourse, getTopCourse } from "../controller/courseController";
+import { createChaters, createCourse, getCourseChapter, getCourseDetails, getCoursePurchaseDetail, getCourseWithSameCategory, getCourseWithSameInstructor, getOneLatestCreatedCourse, getTopCourse } from "../controller/courseController";
 import { protect } from "../middleware/protect";
 
 const router = express.Router()
@@ -12,6 +12,6 @@ router.route('/instructor/course/:id').get(getCourseWithSameInstructor)
 router.route('/purchase/courseDetail/:id').get(protect,getCoursePurchaseDetail)
 router.route('/admin/chapter/create/:id').post(createChaters)
 router.route('/admin/course/latest').get(getOneLatestCreatedCourse)
-router.route('/chapter/:id').get(getChapterDetails)
+router.route('/:id').get(getCourseChapter)
 
 export default router

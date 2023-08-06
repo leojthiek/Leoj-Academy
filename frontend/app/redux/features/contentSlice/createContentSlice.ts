@@ -1,14 +1,19 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import api from "@/app/api/api"
 
+interface CreateContentPayload {
+  formData: FormData;
+  chapterId: string;
+}
+
 export const createContentAction = createAsyncThunk(
   "course/create",
-  async (contentData,id) => {
+  async ({formData,chapterId}:CreateContentPayload) => {
     try {
       const response = await api.post(
-        `/api/courses/admin/chapter/create/${id}`,
-        {contentData},
-        { headers: { "Content-Type": "application/json" } }
+        `/api/content/admin/content/create/${chapterId}`,
+        formData,
+        { headers: { "Content-Type": "multipart/form-data"}}
       )
       const content = response.data.content
       return content
@@ -22,7 +27,7 @@ export const createContentAction = createAsyncThunk(
 )
 
 const createContentReducer = createSlice({
-  name: "registerUser",
+  name: "createContent",
   initialState: {
     content:null,
     loading: false,

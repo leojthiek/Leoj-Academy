@@ -7,10 +7,14 @@ import { AppDataSource } from "../data-source"
 import { CoursePurchase } from "../entities/CoursePurchaseEntity"
 import { Contents } from "../entities/ContentEntity"
 import { Chapters } from "../entities/ChapterEntity"
-import { Course } from "../entities/courseEntity"
+import { upload } from "../middleware/multer"
 
 interface UserRequest extends Request {
   user?: User
+}
+
+interface CustomFile extends Express.Multer.File {
+  key: string
 }
 
 const s3client = new S3Client({
@@ -70,34 +74,44 @@ const getVideoContent = async (req: UserRequest, res: Response) => {
 // CREATING A CONTENT SPECIFIC WISE OF ITS CHAPTER
 
 const createContent = async (req: Request, res: Response) => {
-
   const chapterId = req.params.id
   try {
-    const { title, description ,videoURL} = req.body
-
-    if (title === "") {
-      return res.status(400).json({ errors: "chapter title cannot be empty" })
-    }
+   
 
     const courseRepository = AppDataSource.getRepository(Chapters)
-    const contentChapter = await courseRepository.findOne({where:{id:chapterId}})
-
-
-
-    if(!contentChapter){
-      return res.status(400).json({error:'chapter not found'})
-    }
-
-    const content = new Contents({
-      title,
-      description,
-      videoURL,
-      contentChapter,
+    const contentChapter = await courseRepository.findOne({
+      where: { id: chapterId },
     })
 
-    await AppDataSource.manager.save(content)
+    if (!contentChapter) {
+      return res.status(400).json({ error: "chapter not found" })
+    }
 
-    res.status(200).json({content:content})
+    upload.single("video")(req, res, async function (err: string) {
+      if (err) {
+        console.log(err)
+        return res.status(500).json({ errors: "failed uploading the file" })
+      }
+      const file = req.file as CustomFile
+      const videoKey = file.key
+
+      const { title, description } = req.body
+
+      if (title === "") {
+        return res.status(400).json({ errors: "chapter title cannot be empty" })
+      }
+
+      const content = new Contents({
+        title,
+        description,
+        videoURL: videoKey,
+        contentChapter,
+      })
+
+      await AppDataSource.manager.save(content)
+
+      res.status(200).json({ content: content })
+    })
   } catch (error) {
     console.log(error)
     res.status(400).json({
@@ -105,4 +119,27 @@ const createContent = async (req: Request, res: Response) => {
     })
   }
 }
-export { getVideoContent, createContent }
+
+// GETTING COURSE CHAPTER CONTENT
+
+const getChapterContent = async (req: Request, res: Response) => {
+  const chapterId = req.params.id
+  try {
+    const courseRepository = AppDataSource.getRepository(Chapters)
+    const contents = await courseRepository.findOne({
+      where: { id: chapterId },
+      relations: ["content"],
+    })
+
+    if (!contents) {
+      return res.status(400).json({ errors: "course details not found" })
+    }
+
+    res.status(200).json({ chapter: contents })
+  } catch (error) {
+    console.log("error", error)
+    res.status(400).json({ errors: "failed to retrive course details" })
+  }
+}
+
+export { getVideoContent, createContent, getChapterContent }

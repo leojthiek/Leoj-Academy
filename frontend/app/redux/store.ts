@@ -11,7 +11,8 @@ import createCourseReducer from './features/courseSlice/createCourseSlice'
 import createChapterReducer from './features/courseSlice/createChapter'
 import createContentReducer from './features/contentSlice/createContentSlice'
 import getOneLatestCourseReducer from './features/courseSlice/getOneLatestCourseSlice'
-import chapterDetailReducer from './features/courseSlice/chapterDeailSlice'
+import getAllChapterReducer from './features/courseSlice/allChapter'
+import getAllChapterContentReducer from './features/contentSlice/getChapterContentSlice'
 
 
 
@@ -29,7 +30,8 @@ const store = configureStore({
         createChapter:createChapterReducer,
         createContent:createContentReducer,
         latestCourse:getOneLatestCourseReducer,
-        chapterDetail:chapterDetailReducer,
+        allChapter:getAllChapterReducer,
+        chapterContent:getAllChapterContentReducer
     }
 
 })

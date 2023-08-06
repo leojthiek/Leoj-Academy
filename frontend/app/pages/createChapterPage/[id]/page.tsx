@@ -27,6 +27,7 @@ import { AppDispatch, RootState } from "@/app/redux/store"
 import { getCourseDetailAction } from "@/app/redux/features/courseSlice/courseDetailSlice"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
+import { createChapterAction } from "@/app/redux/features/courseSlice/createChapter"
 
 interface Course {
   id: string
@@ -73,8 +74,8 @@ const StyledBodyTableCell = styled(TableCell)(({ theme }) => ({
 }))
 
 export default function CreateCoursePage() {
-  const [chapterTitle, setChapterTitle] = React.useState<string>("")
-  const [description, setDescription] = React.useState<string>("")
+  const [Chapter_title, setChapterTitle] = React.useState<string>("")
+  const [Chapter_description, setDescription] = React.useState<string>("")
 
   const pathname = usePathname()
   const courseId = pathname.split("/").pop()
@@ -89,11 +90,24 @@ export default function CreateCoursePage() {
 
   const chapters = course?.chapter
 
+  const createChapter = useSelector((state:RootState)=>state.createChapter)
+  const {chapters:createdChapter,loading:createChapterLoading,error:createChapterError}= createChapter
+
   React.useEffect(() => {
     dispatch(getCourseDetailAction(courseId as string))
-  }, [dispatch, courseId])
+    if(createdChapter){
+      dispatch(getCourseDetailAction(courseId as string))
+    }
+  }, [dispatch, courseId,createdChapter])
 
-  const handleSubmit = () => {}
+  const handleSubmit = (e:React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if(courseId){
+      dispatch(createChapterAction({Chapter_title,Chapter_description,courseId}))
+    }
+    setChapterTitle("")
+    setDescription("")
+  }
 
   return (
     <Box sx={{ textTransform: "capitalize" }}>
@@ -128,7 +142,7 @@ export default function CreateCoursePage() {
                     variant='outlined'
                     type='text'
                     fullWidth
-                    value={chapterTitle}
+                    value={Chapter_title}
                     onChange={(e) => setChapterTitle(e.target.value)}
                     className={styles.textField}
                   />
@@ -144,7 +158,7 @@ export default function CreateCoursePage() {
                       type='text'
                       required
                       multiline
-                      value={description}
+                      value={Chapter_description}
                       onChange={(e) => setDescription(e.target.value)}
                       variant='outlined'
                       fullWidth
@@ -153,7 +167,7 @@ export default function CreateCoursePage() {
                 </Grid>
                 <Box sx={{ paddingTop: "20px" }}>
                   <Button type='submit' variant='contained'>
-                    create chapter
+                    {createChapterLoading ? "loading" : "create chapter"}
                   </Button>
                 </Box>
               </Form>

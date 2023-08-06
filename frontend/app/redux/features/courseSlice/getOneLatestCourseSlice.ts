@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import api from "@/app/api/api"
 
 export const getOneLatestCourseAction = createAsyncThunk(
-  "course/getTopCourse",
+  "course/getLatest",
   async () => {
     try {
       const response = await api.get(

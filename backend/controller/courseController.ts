@@ -23,35 +23,39 @@ const createCourse = async (req: Request, res: Response) => {
       course_image,
       rating,
       numOfReviews,
-    } = req.body
+    } = req.body;
 
-    const cloudinaryResponse = cloudinary.uploader.upload(course_image,{
-      folder:'second project'
+    const imageBase64 = Array.isArray(course_image) ? course_image[0] : course_image;
+    
+   if(imageBase64){
+    const uploadRes = await cloudinary.uploader.upload(imageBase64,{
+      upload_preset:"second-project"
     })
+    if(uploadRes){
+      const course = new Course({
+        course_name,
+        course_category,
+        course_description,
+        course_image:uploadRes.secure_url,
+        course_instructor,
+        course_price,
+        rating,
+        numOfReviews,
+      });
+  
+      await AppDataSource.manager.save(course);
+  
+      return res.json({ course: course });
+    }
+   }
 
-    const course_image_url = (await cloudinaryResponse).secure_url
-
-    const course = new Course({
-      course_name,
-      course_category,
-      course_description,
-      course_image:course_image_url,
-      course_instructor,
-      course_price,
-      rating,
-      numOfReviews,
-    })
-
-    await AppDataSource.manager.save(course)
-
-    return res.json({ course: course })
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res
       .status(400)
-      .json({ errors: "server error while creating course,please try again" })
+      .json({ errors: "server error while creating course,please try again" });
   }
-}
+};
 
 //  CREATE CHAPTERS COURSE
 
@@ -160,22 +164,22 @@ const getCourseDetails = async (req: Request, res: Response) => {
 }
 
 
-// GET CHAPTER DETAILS
+// GET ALL CHAPTER FROM SPECIFIC COURSE
 
-const getChapterDetails = async (req: Request, res: Response) => {
-  const chapterId = req.params.id
+const getCourseChapter = async (req: Request, res: Response) => {
+  const courseId = req.params.id
   try {
-    const courseRepository = AppDataSource.getRepository(Chapters)
-    const chaptersDetails = await courseRepository.findOne({
-      where: { id: chapterId },
-      relations: ["course", "content"],
+    const courseRepository = AppDataSource.getRepository(Course)
+    const chapters = await courseRepository.findOne({
+      where: { id: courseId },
+      relations: ["chapter"],
     })
 
-    if (!chaptersDetails) {
+    if (!chapters) {
       return res.status(400).json({ errors: "course details not found" })
     }
 
-    res.status(200).json({ chapter: chaptersDetails })
+    res.status(200).json({ course: chapters })
   } catch (error) {
     console.log("error", error)
     res.status(400).json({ errors: "failed to retrive course details" })
@@ -291,5 +295,5 @@ export {
   getCoursePurchaseDetail,
   createChaters,
   getOneLatestCreatedCourse,
-  getChapterDetails
+  getCourseChapter
 }

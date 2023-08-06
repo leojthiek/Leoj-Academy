@@ -3,12 +3,12 @@ import api from "@/app/api/api"
 
 
 
-export const getChapterDetailAction = createAsyncThunk(
-  "course/chapterDetail",
+export const getAllChapterContentAction = createAsyncThunk(
+  "course/chapterContent",
   async (chapterId:string) => {
     try {
       const response = await api.get(
-        `/api/courses/chapter/${chapterId}`,
+        `/api/content/chapter/${chapterId}`,
 
         { headers: { "Content-Type": "application/json" } }
       )
@@ -23,26 +23,26 @@ export const getChapterDetailAction = createAsyncThunk(
   }
 )
 
-const chapterDetailReducer = createSlice({
+const getAllChapterContentReducer = createSlice({
   name: "chapterDetail",
   initialState: {
-    chapter:null,
+    contents:null,
     loading: false,
     error: null as string | unknown,
   },
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(getChapterDetailAction.pending, (state) => {
+      .addCase(getAllChapterContentAction.pending, (state) => {
         ;(state.loading = true), (state.error = false)
       })
-      .addCase(getChapterDetailAction.fulfilled, (state, action) => {
-        ;(state.loading = false), (state.chapter = action.payload)
+      .addCase(getAllChapterContentAction.fulfilled, (state, action) => {
+        ;(state.loading = false), (state.contents = action.payload)
       })
-      .addCase(getChapterDetailAction.rejected, (state, action) => {
+      .addCase(getAllChapterContentAction.rejected, (state, action) => {
         ;(state.error = action.error.message), (state.loading = false)
       })
   },
 })
 
-export default chapterDetailReducer.reducer
+export default getAllChapterContentReducer.reducer

@@ -4,6 +4,7 @@ import {
   Autocomplete,
   Box,
   Button,
+  CircularProgress,
   Container,
   Grid,
   MenuItem,
@@ -54,31 +55,27 @@ const StyledBodyTableCell = styled(TableCell)(({ theme }) => ({
 }))
 
 export default function CreateCoursePage() {
-  const [showCourse,setShowCourse] = React.useState(false)
-  const [course_name,setCourseName]=React.useState<string>("")
-  const [course_description,setCourseDesc]=React.useState<string>("")
-  const [course_category,setCourseCategory]=React.useState<string>("")
-  const [course_instructor,setCourseInstructor]=React.useState<string>("")
-  const [course_image,setCourseImage]=React.useState<string>("")
-  const [course_price,setCoursePrice]=React.useState<number>(0)
-
-
+  const [showCourse, setShowCourse] = React.useState<boolean>(false)
+  const [course_name, setCourseName] = React.useState<string>("")
+  const [course_description, setCourseDesc] = React.useState<string>("")
+  const [course_category, setCourseCategory] = React.useState<string>("")
+  const [course_instructor, setCourseInstructor] = React.useState<string>("")
+  const [course_image, setCourseImage] = React.useState<string>("")
+  const [course_price, setCoursePrice] = React.useState<number>()
 
   const dispatch: AppDispatch = useDispatch()
 
   const latestCourse = useSelector<
     RootState,
-    { course: null | Course[] ; error: unknown; loading: boolean }
+    { course: null | Course[]; error: unknown; loading: boolean }
   >((state) => state.latestCourse)
   const { course, error, loading } = latestCourse
 
+  const createCourse = useSelector((state: RootState) => state.createCourse)
+  const { error: createCourseError, loading: createCourseLoading } =
+    createCourse
 
-  React.useEffect(() => {
-    dispatch(getOneLatestCourseAction())
-  }, [dispatch])
-
-
-  const handleSubmit=(e:React.FormEvent<HTMLFormElement>)=>{
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const courseData = {
       course_category,
@@ -86,14 +83,44 @@ export default function CreateCoursePage() {
       course_image,
       course_instructor,
       course_name,
-      course_price
+      course_price,
     }
-    dispatch(createCourseAction(courseData))
-    setShowCourse(true)
+
+    try {
+      await dispatch(createCourseAction(courseData))
+      setCourseCategory("")
+      setCourseDesc("")
+      setCourseInstructor("")
+      setCourseName("")
+      setCoursePrice(Number())
+      setCourseImage("")
+      setShowCourse(true)
+      await dispatch(getOneLatestCourseAction())
+    } catch (error) {
+      console.error("Error creating course:", error)
+    }
   }
 
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files
 
+    if (files && files.length > 0) {
+      const file = files[0]
+      transformFile(file)
+    }
+  }
 
+  const transformFile = (file: File) => {
+    const reader = new FileReader()
+    if (file) {
+      reader.readAsDataURL(file)
+      reader.onloadend = () => {
+        setCourseImage(reader.result as string)
+      }
+    } else {
+      setCourseImage("")
+    }
+  }
 
   return (
     <Box>
@@ -123,7 +150,7 @@ export default function CreateCoursePage() {
                       type='text'
                       fullWidth
                       value={course_name}
-                      onChange={(e)=> setCourseName(e.target.value)}
+                      onChange={(e) => setCourseName(e.target.value)}
                       className={styles.textField}
                     />
                   </Grid>
@@ -139,10 +166,9 @@ export default function CreateCoursePage() {
                       type='text'
                       fullWidth
                       value={course_category}
-                      onChange={(e)=> setCourseCategory(e.target.value)}
+                      onChange={(e) => setCourseCategory(e.target.value)}
                       className={styles.textField}
                     />
-                    
                   </Grid>
                 </Grid>
                 <Grid container gap={2} style={{ paddingTop: "20px" }}>
@@ -157,7 +183,7 @@ export default function CreateCoursePage() {
                       variant='outlined'
                       type='text'
                       value={course_instructor}
-                      onChange={(e)=> setCourseInstructor(e.target.value)}
+                      onChange={(e) => setCourseInstructor(e.target.value)}
                       fullWidth
                       className={styles.textField}
                     />
@@ -169,11 +195,11 @@ export default function CreateCoursePage() {
                     <TextField
                       size='medium'
                       required
+                      placeholder='eg:100'
                       variant='outlined'
-                      label='Eg:100'
                       type='number'
                       value={course_price}
-                      onChange={(e) => setCoursePrice(parseFloat(e.target.value))}
+                      onChange={(e) => setCoursePrice(parseInt(e.target.value))}
                       fullWidth
                       className={styles.textField}
                     />
@@ -189,7 +215,9 @@ export default function CreateCoursePage() {
                       required
                       size='medium'
                       variant='outlined'
+                      onChange={handleImageUpload}
                       fullWidth
+                      defaultValue={""}
                     />
                   </Grid>
                 </Grid>
@@ -205,21 +233,27 @@ export default function CreateCoursePage() {
                       required
                       multiline
                       value={course_description}
-                      onChange={(e)=>setCourseDesc(e.target.value)}
+                      onChange={(e) => setCourseDesc(e.target.value)}
                       variant='outlined'
                       fullWidth
                     />
                   </Grid>
                 </Grid>
                 <Box sx={{ paddingTop: "20px" }}>
-                  <Button type="submit" variant='contained'>create course</Button>
+                  <Button type='submit' variant='contained'>
+                    {createCourseLoading ? (
+                       "Loading..."
+                    ) : (
+                      "create course"
+                    )}
+                  </Button>
                 </Box>
               </Form>
             </FormContainer>
             <Box sx={{ paddingTop: "50px" }}>
               <Box sx={{ paddingBottom: "30px" }}>
                 <Typography className={styles.rightBottomTitle}>
-                   Newly created course :
+                  Newly created course :
                 </Typography>
               </Box>
               <TableContainer component={Paper}>
@@ -234,10 +268,11 @@ export default function CreateCoursePage() {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    
-                    { course && (
+                    {showCourse && course && (
                       <TableRow>
-                        <StyledBodyTableCell>{course[0].id}</StyledBodyTableCell>
+                        <StyledBodyTableCell>
+                          {course[0].id}
+                        </StyledBodyTableCell>
                         <StyledBodyTableCell>
                           {course[0].course_name}
                         </StyledBodyTableCell>
@@ -248,10 +283,12 @@ export default function CreateCoursePage() {
                           {course[0].course_instructor}
                         </StyledBodyTableCell>
                         <TableCell>
-                          <Link href={`/pages/createChapterPage/${course[0].id}`}>
-                          <Button size='small' variant='outlined'>
-                            create chapter
-                          </Button>
+                          <Link
+                            href={`/pages/createChapterPage/${course[0].id}`}
+                          >
+                            <Button size='small' variant='outlined'>
+                              create chapter
+                            </Button>
                           </Link>
                         </TableCell>
                       </TableRow>

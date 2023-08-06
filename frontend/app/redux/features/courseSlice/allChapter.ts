@@ -1,20 +1,18 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import api from "@/app/api/api"
 
-export const createChapterAction = createAsyncThunk(
-  "course/createChapter",
-  async ({
-    Chapter_title,
-    Chapter_description,
-    courseId
-  }:{Chapter_title:string,Chapter_description:string,courseId:string}) => {
+
+
+export const getAllChapterAction = createAsyncThunk(
+  "course/chapterDetail",
+  async (courseId:string) => {
     try {
-      const response = await api.post(
-        `/api/courses/admin/chapter/create/${courseId}`,
-        {Chapter_title,Chapter_description},
+      const response = await api.get(
+        `/api/courses/${courseId}`,
+
         { headers: { "Content-Type": "application/json" } }
       )
-      const chapter = response.data.chapters
+      const chapter = response.data.chapter
       return chapter
     } catch (error: string | any) {
       console.log(error)
@@ -25,8 +23,8 @@ export const createChapterAction = createAsyncThunk(
   }
 )
 
-const createChapterReducer = createSlice({
-  name: "createChapter",
+const getAllChapterReducer = createSlice({
+  name: "chapterDetail",
   initialState: {
     chapters:null,
     loading: false,
@@ -35,16 +33,16 @@ const createChapterReducer = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(createChapterAction.pending, (state) => {
+      .addCase(getAllChapterAction.pending, (state) => {
         ;(state.loading = true), (state.error = false)
       })
-      .addCase(createChapterAction.fulfilled, (state, action) => {
+      .addCase(getAllChapterAction.fulfilled, (state, action) => {
         ;(state.loading = false), (state.chapters = action.payload)
       })
-      .addCase(createChapterAction.rejected, (state, action) => {
+      .addCase(getAllChapterAction.rejected, (state, action) => {
         ;(state.error = action.error.message), (state.loading = false)
       })
   },
 })
 
-export default createChapterReducer.reducer
+export default getAllChapterReducer.reducer

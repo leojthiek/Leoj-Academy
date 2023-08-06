@@ -24,7 +24,9 @@ import { AppDispatch, RootState } from "@/app/redux/store"
 import { getCourseDetailAction } from "@/app/redux/features/courseSlice/courseDetailSlice"
 import { usePathname } from "next/navigation"
 import Link from "next/link"
-import { getChapterDetailAction } from "@/app/redux/features/courseSlice/chapterDeailSlice"
+import { getAllChapterAction } from "@/app/redux/features/courseSlice/allChapter"
+import { getAllChapterContentAction } from "@/app/redux/features/contentSlice/getChapterContentSlice"
+import { createContentAction } from "@/app/redux/features/contentSlice/createContentSlice"
 
 interface Chapters {
   id: string
@@ -71,23 +73,61 @@ const StyledBodyTableCell = styled(TableCell)(({ theme }) => ({
 export default function CreateContentPage() {
   const [title, setTitle] = React.useState<string>("")
   const [description, setDescription] = React.useState<string>("")
+  const [videoFile,setVideoFile] = React.useState<File | null>(null)
 
   const pathname = usePathname()
   const chapterId = pathname.split("/").pop()
 
   const dispatch: AppDispatch = useDispatch()
 
-  const chapterDetails = useSelector<
+  const chapterContent = useSelector<
     RootState,
-    { chapter: Chapters | null; error: unknown; loading: boolean }
-  >((state) => state.chapterDetail)
-  const { chapter, error, loading } = chapterDetails
+    { contents: null | Chapters; error: unknown; loading: boolean }
+  >((state) => state.chapterContent)
+
+  const { contents, error, loading } = chapterContent
+
+  const createContent = useSelector((state: RootState) => state.createContent)
+  const {
+    content,
+    error: createContentError,
+    loading: createContentLoading,
+  } = createContent
 
   React.useEffect(() => {
-    dispatch(getChapterDetailAction(chapterId as string))
-  }, [dispatch, chapterId])
+    dispatch(getAllChapterContentAction(chapterId as string))
+    if (content) {
+      dispatch(getAllChapterContentAction(chapterId as string))
+    }
+  }, [dispatch, chapterId,content])
 
-  const handleSubmit = () => {}
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (!title || !description || !videoFile) {
+      alert("Please fill all required fields.");
+      return;
+    }
+    if (chapterId) {
+      const formData = new FormData()
+      formData.append("title",title)
+      formData.append("description",description)
+      formData.append("video",videoFile)
+
+      dispatch(createContentAction({formData,chapterId}))
+    }
+    setTitle("")
+    setDescription("")
+  }
+
+  const handleVideoChange = (e:React.ChangeEvent<HTMLInputElement>)=>{
+     const files = e.target.files
+
+     if(files && files.length > 0){
+      const file = files[0]
+      setVideoFile(file)
+     }
+     
+  }
 
   return (
     <Box sx={{ textTransform: "capitalize" }}>
@@ -96,7 +136,7 @@ export default function CreateContentPage() {
           <AdminLeftGrid />
         </Grid>
         <Grid item md={10}>
-          <Link href={`/pages/createChapterPage/${chapter?.course.id}`}>
+          <Link href={`/pages/createChapterPage/${contents?.id}`}>
             <Button>back</Button>
           </Link>
           <Container>
@@ -104,7 +144,7 @@ export default function CreateContentPage() {
               <Typography className={styles.pageTitle}>
                 Create content for chapter :{" "}
                 <span className={styles.courseTableTitle}>
-                  {chapter?.Chapter_title}
+                  {contents?.Chapter_title}
                 </span>{" "}
                 -
               </Typography>
@@ -135,6 +175,8 @@ export default function CreateContentPage() {
                     </Typography>
                     <TextField
                       type='file'
+                      id="videoFile"
+                      onChange={handleVideoChange}
                       required
                       variant='outlined'
                       fullWidth
@@ -161,7 +203,7 @@ export default function CreateContentPage() {
                 </Grid>
                 <Box sx={{ paddingTop: "20px" }}>
                   <Button type='submit' variant='contained'>
-                    create content
+                    {createContentLoading ? "creating content..." : "create content"}
                   </Button>
                 </Box>
               </Form>
@@ -169,32 +211,39 @@ export default function CreateContentPage() {
             <Box sx={{ paddingTop: "50px" }}>
               <Box sx={{ paddingBottom: "30px" }}>
                 <Typography className={styles.rightBottomTitle}>
-                 content list for the chapter{" "}
+                  content list for the chapter{" "}
                   <span className={styles.courseTableTitle}>
-                    {chapter?.Chapter_title}
+                    {contents?.Chapter_title}
                   </span>
                 </Typography>
               </Box>
+              {loading ? <Typography>Loading...</Typography> : error ? <Typography>{error as string}</Typography> :
               <TableContainer component={Paper}>
                 <Table>
                   <TableHead sx={{ backgroundColor: "black" }}>
                     <TableRow>
                       <StyledTableCell>Content id</StyledTableCell>
                       <StyledTableCell>content Title</StyledTableCell>
+                      <StyledTableCell>video key</StyledTableCell>
+
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {chapter?.content.map((content) => (
-                      <TableRow key={content.id}>
-                        <StyledBodyTableCell>{content.id}</StyledBodyTableCell>
+                    {contents?.content.map((cont) => (
+                      <TableRow key={cont.id}>
+                        <StyledBodyTableCell>{cont.id}</StyledBodyTableCell>
                         <StyledBodyTableCell>
-                          {content.title}
+                          {cont.title}
+                        </StyledBodyTableCell>
+                        <StyledBodyTableCell>
+                          {cont.videoURL}
                         </StyledBodyTableCell>
                       </TableRow>
                     ))}
                   </TableBody>
                 </Table>
               </TableContainer>
+}
             </Box>
           </Container>
         </Grid>
