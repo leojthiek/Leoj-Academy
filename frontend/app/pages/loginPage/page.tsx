@@ -106,7 +106,7 @@ export default function LoginPage() {
       </FirstBox>
       <SecondBox>
         <Title>
-          <Typography className={styles.title}>
+          <Typography className={styles.pageTitle}>
             Sign in with your Account
           </Typography>
         </Title>
