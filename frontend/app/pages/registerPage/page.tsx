@@ -113,7 +113,7 @@ export default function RegisterPage() {
       </FirstBox>
       <SecondBox>
         <Title>
-          <Typography className={styles.title}>Create an account</Typography>
+          <Typography sx={{fontSize:'1.8219rem',fontWeight:'700',paddingTop:'40px',paddingLeft:'30px'}}>Create an account</Typography>
         </Title>
         <Typography className={styles.desc}>
           Fill out the form to get started
