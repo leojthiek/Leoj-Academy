@@ -1,0 +1,26 @@
+.logo{
+    text-align: center;
+    font-size: 22px;
+    font-weight: 600;
+    padding-top: 30px;
+    font-family: secular one;
+}
+.logoContainer{
+    border-bottom: 0.80px solid gray;
+}
+.iconText{
+    font-size: 18px;
+    font-weight: 600;
+    font-family: secular one;
+}
+.leftMain{
+    padding-top: 30px;
+}
+.controllerContainer{
+    padding-top: 30px;
+}
+.controller{
+    font-size: 15px;
+    font-weight: 600;
+    color: gray;
+}
