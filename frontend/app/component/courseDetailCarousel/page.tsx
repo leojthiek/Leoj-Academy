@@ -1,11 +1,9 @@
 "use client"
 
 import {
-  Box,
   Button,
   Card,
   CardActionArea,
-  CardActions,
   CardContent,
   CardMedia,
   Container,
@@ -16,10 +14,8 @@ import {
 import React from "react"
 import styles from "./page.module.css"
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart"
-import { AppDispatch, RootState } from "@/app/redux/store"
-import { useDispatch, useSelector } from "react-redux"
-import { usePathname } from "next/navigation"
-import { getCourseDetailAction } from "@/app/redux/features/courseSlice/courseDetailSlice"
+import {  RootState } from "@/app/redux/store"
+import { useSelector } from "react-redux"
 
 interface Course {
   id: string
