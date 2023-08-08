@@ -1,21 +1,15 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import api from "@/app/api/api"
 
-// const USER_LOCAL_STORAGE_KEY = "userInformation";
-// const userFromLocalStorage =
-//   typeof window !== "undefined" ? localStorage.getItem(USER_LOCAL_STORAGE_KEY) : null;
+const USER_LOCAL_STORAGE_KEY = "userInformation";
+const userFromLocalStorage =
+  typeof window !== "undefined" ? localStorage.getItem(USER_LOCAL_STORAGE_KEY) : null;
 
-//   const initialState = {
-//     user: userFromLocalStorage ? JSON.parse(userFromLocalStorage) : null,
-//     loading: false,
-//     error: null as string | unknown,
-//   };
-
-const initialState={
-  user:null,
-  loading:false,
-  error:null as string | unknown
-}
+  const initialState = {
+    user: userFromLocalStorage ? JSON.parse(userFromLocalStorage) : null,
+    loading: false,
+    error: null as string | unknown,
+  };
 
 export const loginAction = createAsyncThunk(
   "user/login",
@@ -33,9 +27,9 @@ export const loginAction = createAsyncThunk(
         { headers: { "Content-Type": "application/json" } }
       )
       const user = response.data.userInfo
-      // if (typeof window !== "undefined") {
-      //   localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(user));
-      // }
+      if (typeof window !== "undefined") {
+        localStorage.setItem(USER_LOCAL_STORAGE_KEY, JSON.stringify(user));
+      }
       return user
     } catch (error: string | any) {
       console.log(error)
@@ -47,14 +41,14 @@ export const loginAction = createAsyncThunk(
 )
 
  export const logoutAction = createAsyncThunk("user/logout",async()=>{
-//   try {
-//     if(typeof window !== "undefined"){
-//       localStorage.removeItem(USER_LOCAL_STORAGE_KEY)
-//     }
-//     return null
-//   } catch (error) {
-//     console.log(error)
-//   }
+  try {
+    if(typeof window !== "undefined"){
+      localStorage.removeItem(USER_LOCAL_STORAGE_KEY)
+    }
+    return null
+  } catch (error) {
+    console.log(error)
+  }
 })
 
 const loginUserReducer = createSlice({
