@@ -105,10 +105,10 @@ export default function CourseDetailPage() {
                 </Grid>
                 <Grid item md={6}>
                   <div className={styles.mainContainer}>
-                    <Typography className={styles.courseName}>{course?.course_name}</Typography>
-                    <Typography className={styles.courseDesc}>{course?.course_description}</Typography>
-                    <Typography className={styles.rating}> Rating : ({course?.rating}) {course?.numOfReviews} students</Typography>
-                    <Typography className={styles.instructor}> Instructor : <span> {course?.course_instructor}</span> </Typography>    
+                    <Typography sx={{fontSize:'32px',fontWeight:'800',lineHeight:'2rem',fontFamily:'secular one'}}>{course?.course_name}</Typography>
+                    <Typography sx={{fontSize:'16px',fontWeight:'400',paddingTop:'10px',fontFamily:'secular one'}}>{course?.course_description}</Typography>
+                    <Typography sx={{fontSize:'16px',fontWeight:'800',paddingTop:'10px',fontFamily:'secular one'}}> Rating : <span style={{fontWeight:'400'}}>({course?.rating}) {course?.numOfReviews} students</span></Typography>
+                    <Typography sx={{fontSize:'16px',fontWeight:'800',paddingTop:'10px',fontFamily:'secular one'}}> Instructor : <span style={{fontWeight:'400'}}> {course?.course_instructor}</span> </Typography>    
                   </div>
                   <div className={styles.btnContainer}>
                     <Link href={`/pages/videoPlayingPage/${course?.id}`}>
