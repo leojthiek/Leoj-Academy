@@ -22,9 +22,7 @@ import Link from "next/link"
 const CourseDetailCarousel = dynamic(
   () => import("@/app/component/courseDetailCarousel/page")
 )
-const CourseContent = dynamic(
-  () => import("@/app/component/courseContent/page")
-)
+const CourseContent = dynamic(()=> import('@/app/component/courseContent/page'))
 
 const InstructorCourse = dynamic(
   () => import("@/app/component/instructorCourse/page")
@@ -132,38 +130,38 @@ export default function CourseDetailPage() {
       </Box>
       <Box>
         <Container>
-          <Typography className={styles.title}>
+          <Typography sx={{paddingTop:'30px',fontSize:'22px',fontWeight:'900',paddingBottom:'10px'}}>
             Review made by student on this course :
           </Typography>
           <Grid container>
             <Grid item md={6}>
-              <div className={styles.commentUser}>
+              <Box sx={{display:'flex',alignItems:'center',gap:'10px'}}>
                 <div className={styles.avatar}>
                   <Avatar sx={{ bgcolor: "#00439d" }}>VI</Avatar>
                 </div>
                 <div>
-                  <Typography className={styles.username}>vincent</Typography>
-                  <Typography className={styles.rating}>xxxx</Typography>
+                  <Typography sx={{fontSize:'18px',fontWeight:'700',paddingTop:'10px'}}>vincent</Typography>
+                  <Typography sx={{fontWeight:'700'}}>xxxx</Typography>
                 </div>
-              </div>
+              </Box>
 
-              <Typography className={styles.comment}>
+              <Typography sx={{fontWeight:'600',fontFamily:'secular one',paddingTop:'15px'}}>
                 It is an excellent course for beginners to start with. Not only
                 does it have fantastic teaching of the course material but it
                 also directs you to extra materials you can look for.
               </Typography>
             </Grid>
             <Grid item md={6}>
-              <div className={styles.commentUser}>
+              <Box sx={{display:'flex',alignItems:'center',gap:'10px'}}>
                 <div className={styles.avatar}>
                   <Avatar sx={{ bgcolor: "#00439d" }}>TI</Avatar>
                 </div>
                 <div>
-                  <Typography className={styles.username}>Tim</Typography>
-                  <Typography className={styles.rating}>xxxx</Typography>
+                  <Typography sx={{fontSize:'18px',fontWeight:'700',paddingTop:'10px'}}>Tim</Typography>
+                  <Typography sx={{fontWeight:'700'}}>xxxx</Typography>
                 </div>
-              </div>
-              <Typography className={styles.comment}>
+              </Box>
+              <Typography  sx={{fontWeight:'600',fontFamily:'secular one',paddingTop:'15px'}}>
                 It is an excellent course for beginners to start with. Not only
                 does it have fantastic teaching of the course material but it
                 also directs you to extra materials you can look for.

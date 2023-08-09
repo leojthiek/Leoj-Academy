@@ -1,34 +1,13 @@
 
 
-.title{
-    padding-top: 30px;
-    font-size:22px;
-    font-weight: 900;
-    padding-bottom: 10px;
-}
 
-.reviewUser{
-   padding-top: 10px;
-}
-.username{
-    font-size: 18px;
-    font-weight: 700;
-    padding-top: 20px;
-}
-.comment{
-    padding-top: 10px;
-    font-family:'secular one';
-    font-size: 16px;
-    font-weight: 600;
-}
+
+
+
 .btnContainer{
     padding-top: 20px;
 }
-.commentUser{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
+
 
 .courseName{
     font-family: SuisseWorks,Georgia,Times,'Times New Roman',serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
@@ -43,12 +22,7 @@
     padding-top: 10px;
     font-family: SuisseWorks,Georgia,Times,'Times New Roman',serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
 }
-.rating{
-    font-family: secular one;
-    font-size: 16px;
-    font-weight: 800;
-    padding-top: 10px;
-}
+
 .instructor{
     font-family: secular one;
     font-size: 16px;
