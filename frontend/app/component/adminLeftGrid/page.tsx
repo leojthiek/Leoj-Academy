@@ -31,7 +31,7 @@ export default function AdminLeftGrid() {
       
           <LeftDashBoard>
             <div className={styles.logoContainer}>
-              <Typography gutterBottom className={styles.logo}>
+              <Typography gutterBottom sx={{fontSize:'22px',fontWeight:'600',paddingTop:'30px',fontFamily:'secular one',textAlign:'center'}}>
                 Leoj Academy
               </Typography>
             </div>
@@ -43,7 +43,7 @@ export default function AdminLeftGrid() {
                     <ListItemIcon style={{color:'#1639d9'}}>
                       <DashboardIcon />
                     </ListItemIcon>
-                   <Typography className={styles.iconText}>Dashboard</Typography>
+                   <Typography sx={{fontSize:'18px',fontWeight:'600',fontFamily:'secular one'}}>Dashboard</Typography>
                   </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
@@ -51,7 +51,7 @@ export default function AdminLeftGrid() {
                     <ListItemIcon style={{color:'#1639d9'}}>
                       <PeopleAltIcon />
                     </ListItemIcon>
-                   <Typography className={styles.iconText}>Users</Typography>
+                   <Typography sx={{fontSize:'18px',fontWeight:'600',fontFamily:'secular one'}}>Users</Typography>
                   </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
@@ -59,13 +59,13 @@ export default function AdminLeftGrid() {
                     <ListItemIcon style={{color:'#1639d9'}}>
                       <SchoolIcon />
                     </ListItemIcon>
-                   <Typography className={styles.iconText}>Courses</Typography>
+                   <Typography sx={{fontSize:'18px',fontWeight:'600',fontFamily:'secular one'}}>Courses</Typography>
                   </ListItemButton>
                 </ListItem>
               </List>
-              <div className={styles.controllerContainer}>
-                <Typography className={styles.controller}>Controller</Typography>
-              </div>
+              <Box sx={{paddingTop:'30px'}}>
+                <Typography sx={{fontSize:'15px',fontWeight:'600',color:'gray'}}>Controller</Typography>
+              </Box>
               <List>
               <ListItem disablePadding>
                 <Link href={'/pages/createCoursePage'} style={{textDecoration:'none'}}>
@@ -73,7 +73,7 @@ export default function AdminLeftGrid() {
                     <ListItemIcon style={{color:'#1639d9'}}>
                       <SchoolIcon />
                     </ListItemIcon>
-                   <Typography className={styles.iconText}>Manage Course</Typography>
+                   <Typography sx={{fontSize:'18px',fontWeight:'600',fontFamily:'secular one'}}>Manage Course</Typography>
                   </ListItemButton>
                   </Link>
                 </ListItem>
