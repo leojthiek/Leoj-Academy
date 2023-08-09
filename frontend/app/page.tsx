@@ -61,7 +61,7 @@ export default function Home() {
             
             <Grid item md={3} key={cours.id}>
               <Link href={`/pages/courseDetailPage/${cours.id}`} style={{textDecoration:'none'}}>
-              <Card sx={{ maxWidth:250 }}>
+              <Card sx={{ maxWidth:250 , height:300,}}>
                 <CardActionArea>
                  
                     
@@ -71,17 +71,17 @@ export default function Home() {
                     image='/pyton.jpg'
                     alt='green iguana'
                   />
-                  <CardContent>
-                    <Typography className={styles.cardTitle} >
+                  <CardContent sx={{textTransform:'capitalize'}}>
+                    <Typography sx={{lineHeight:'1.2rem',fontSize:'1rem', color:'black',fontFamily:'secular one', fontWeight:'600'}} >
                        {cours.course_name}
                     </Typography>
-                    <Typography className={styles.cardInstructor}>
+                    <Typography sx={{fontSize:'.90rem',fontFamily:'secular one', fontWeight:'600',paddingTop:'5px'}}>
                      {cours.course_instructor}
                     </Typography>
                     <Typography className={styles.cardRating}>
                      xxxx (345)
                     </Typography>
-                    <Typography className={styles.cardPrice}>
+                    <Typography sx={{fontWeight:'600',fontSize:'1.3rem',fontFamily:'secular one'}}>
                     &#x20B9; {cours.course_price}
                     </Typography>
                   </CardContent>

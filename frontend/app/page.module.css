@@ -7,22 +7,8 @@
     color: blue;
 }
 
-.cardTitle{
-    line-height: 1.2rem;
-    letter-spacing: .02rem;
-    font-size: 1rem;
-    color:black;
-    font-family: anton;
-    font-weight: 800;
 
-}
-.cardInstructor{
-    font-size: .90rem;
-    font-family: anton;
-    font-weight: 800;
-    color: gray;
-    padding-top: 8px;
-}
+
 
 .cardRating{
     font-weight:800;
@@ -30,8 +16,3 @@
     font-size: .90rem;
 }
 
-.cardPrice{
-    font-weight:800;
-    font-family: anton;
-    font-size: 1.3rem;
-}
