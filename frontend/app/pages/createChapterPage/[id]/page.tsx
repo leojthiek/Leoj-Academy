@@ -121,7 +121,7 @@ export default function CreateCoursePage() {
           </Link>
           <Container>
             <div className={styles.pageTitleContainer}>
-              <Typography className={styles.pageTitle}>
+              <Typography sx={{fontSize:'20px',fontWeight:'800',fontFamily:'sans-serif'}}>
                 Create chapter for course :{" "}
                 <span className={styles.courseTableTitle}>
                   {course?.course_name}
@@ -132,7 +132,7 @@ export default function CreateCoursePage() {
             <FormContainer>
               <Form onSubmit={handleSubmit}>
                 <Grid item md={10}>
-                  <Typography className={styles.inputTitle}>
+                  <Typography sx={{paddingBottom:'5px',fontSize:'17px',fontFamily:'sans-serif',fontWeight:'700'}}>
                     Chapter Title
                   </Typography>
                   <TextField
@@ -150,7 +150,7 @@ export default function CreateCoursePage() {
 
                 <Grid container style={{ paddingTop: "20px" }}>
                   <Grid item md={10}>
-                    <Typography className={styles.inputTitle}>
+                    <Typography sx={{paddingBottom:'5px',fontSize:'17px',fontFamily:'sans-serif',fontWeight:'700'}}>
                       Course description
                     </Typography>
                     <TextField
@@ -174,7 +174,7 @@ export default function CreateCoursePage() {
             </FormContainer>
             <Box sx={{ paddingTop: "50px" }}>
               <Box sx={{ paddingBottom: "30px" }}>
-                <Typography className={styles.rightBottomTitle}>
+                <Typography sx={{fontSize:'20px',fontWeight:'800',fontFamily:'sans-serif'}}>
                   chapter list for the course{" "}
                   <span className={styles.courseTableTitle}>
                     {course?.course_name}

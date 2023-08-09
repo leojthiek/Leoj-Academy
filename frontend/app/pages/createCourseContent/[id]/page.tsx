@@ -141,7 +141,7 @@ export default function CreateContentPage() {
           </Link>
           <Container>
             <div className={styles.pageTitleContainer}>
-              <Typography className={styles.pageTitle}>
+              <Typography sx={{fontSize:'20px',fontWeight:'800',fontFamily:'sans-serif'}}>
                 Create content for chapter :{" "}
                 <span className={styles.courseTableTitle}>
                   {contents?.Chapter_title}
@@ -152,7 +152,7 @@ export default function CreateContentPage() {
             <FormContainer>
               <Form onSubmit={handleSubmit}>
                 <Grid item md={10}>
-                  <Typography className={styles.inputTitle}>
+                  <Typography sx={{paddingBottom:'5px',fontSize:'17px',fontFamily:'sans-serif',fontWeight:'700'}}>
                     Content Title
                   </Typography>
                   <TextField
@@ -170,7 +170,7 @@ export default function CreateContentPage() {
 
                 <Grid container style={{ paddingTop: "20px" }}>
                   <Grid item md={10}>
-                    <Typography className={styles.inputTitle}>
+                    <Typography sx={{paddingBottom:'5px',fontSize:'17px',fontFamily:'sans-serif',fontWeight:'700'}}>
                       content video
                     </Typography>
                     <TextField
@@ -186,7 +186,7 @@ export default function CreateContentPage() {
 
                 <Grid container style={{ paddingTop: "20px" }}>
                   <Grid item md={10}>
-                    <Typography className={styles.inputTitle}>
+                    <Typography sx={{paddingBottom:'5px',fontSize:'17px',fontFamily:'sans-serif',fontWeight:'700'}}>
                       Content description
                     </Typography>
                     <TextField
@@ -210,7 +210,7 @@ export default function CreateContentPage() {
             </FormContainer>
             <Box sx={{ paddingTop: "50px" }}>
               <Box sx={{ paddingBottom: "30px" }}>
-                <Typography className={styles.rightBottomTitle}>
+                <Typography sx={{fontSize:'20px',fontWeight:'800',fontFamily:'sans-serif'}}>
                   content list for the chapter{" "}
                   <span className={styles.courseTableTitle}>
                     {contents?.Chapter_title}
