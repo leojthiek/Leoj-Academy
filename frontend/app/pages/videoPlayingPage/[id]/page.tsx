@@ -127,7 +127,7 @@ export default function VideoPlayingPage() {
       <div className={styles.courseTitleContainer}>
         <Title>{course?.course_name}</Title>
       </div>
-      <Grid container style={{}}>
+      <Grid container>
         <Grid item md={8}>
           <VideoContainer>
             <ReactPlayer url={url} controls width={1200} height={600} />
@@ -135,44 +135,44 @@ export default function VideoPlayingPage() {
           <Container>
             <div className={styles.select}>
               <div onClick={handleClickAbout}>
-                <Typography className={styles.selectItem} style={{borderBottom: about ? '2px solid black': ''}}>About</Typography>
+                <Typography sx={{borderBottom: about ? '2px solid black': '', fontFamily:'sans-serif',fontSize:'19px',fontWeight:'800',cursor:'pointer'}}>About</Typography>
               </div>
               <div onClick={handleClickReview}>
-                <Typography className={styles.selectItem} style={{borderBottom: review ? '2px solid black': ''}}>Review</Typography>
+                <Typography sx={{borderBottom: review ? '2px solid black': '', fontFamily:'sans-serif',fontSize:'19px',fontWeight:'800',cursor:'pointer'}}>Review</Typography>
               </div>
             </div>
 
             {about ? (
               <>
                 <div style={{ paddingTop: "20px" }}>
-                  <Typography className={styles.about}>
+                  <Typography sx={{fontFamily:'sans-serif',fontWeight:'800',fontSize:'22px'}}>
                     About this course
                   </Typography>
-                  <Typography className={styles.aboutCourse}>
+                  <Typography sx={{fontFamily:'sans-serif',fontSize:'16',fontWeight:'400',paddingBottom:'20px'}}>
                     See details about{" "}
                     <span style={{ color: "brown" }}>
                       {course?.course_name}
                     </span>
                   </Typography>
-                  <Typography className={styles.aboutDetails}>
+                  <Typography sx={{fontFamily:'sans-serif',fontSize:'19',fontWeight:'600',paddingTop:'10px',display:'flex',alignItems:'center',gap:'30px',paddingBottom:'30px',borderBottom:'1px solid gray',textTransform:"capitalize"}}>
                     Course Name :{" "}
                     <span className={styles.aboutSpan}>
                       {course?.course_name}
                     </span>
                   </Typography>
-                  <Typography className={styles.aboutDetails}>
+                  <Typography sx={{fontFamily:'sans-serif',fontSize:'19',fontWeight:'600',paddingTop:'10px',display:'flex',alignItems:'center',gap:'30px',paddingBottom:'30px',borderBottom:'1px solid gray',textTransform:"capitalize"}}>
                     Category :{" "}
                     <span className={styles.aboutSpan}>
                       {course?.course_category}
                     </span>
                   </Typography>
-                  <Typography className={styles.aboutDetails}>
+                  <Typography sx={{fontFamily:'sans-serif',fontSize:'19',fontWeight:'600',paddingTop:'10px',display:'flex',alignItems:'center',gap:'30px',paddingBottom:'30px',borderBottom:'1px solid gray',textTransform:"capitalize"}}>
                     Instructor :{" "}
                     <span className={styles.aboutSpan}>
                       {course?.course_instructor}
                     </span>
                   </Typography>
-                  <Typography className={styles.aboutDetails}>
+                  <Typography sx={{fontFamily:'sans-serif',fontSize:'19',fontWeight:'600',paddingTop:'10px',display:'flex',alignItems:'center',gap:'30px',paddingBottom:'30px',borderBottom:'1px solid gray',textTransform:"capitalize"}}>
                     Description :{" "}
                     <span className={styles.aboutSpan}>
                       {course?.course_description}
@@ -181,49 +181,49 @@ export default function VideoPlayingPage() {
                 </div>
               </>
             ) : review ? (
-              <div className={styles.reviews}>
-                <div className={styles.bottomReview}>
-                  <Typography className={styles.reviewTitle}>
+              <div>
+                <Box sx={{paddingTop:'30px',paddingBottom:'30px'}}>
+                  <Typography sx={{fontSize:'22px',fontWeight:'800'}}>
                     Review made by student on this course :
                   </Typography>
-                </div>
+                </Box>
                 <div>
-                  <div className={styles.commentUser}>
-                    <div className={styles.avatar}>
+                  <Box sx={{display:'flex',alignItems:'center',gap:'10px'}}>
+                    <Box className={styles.avatar}>
                       <Avatar sizes='small' sx={{ bgcolor: "#00439d" }}>
                         VI
                       </Avatar>
-                    </div>
+                    </Box>
                     <div>
-                      <Typography className={styles.username}>
+                      <Typography sx={{fontSize:'18px',fontWeight:'700',paddingTop:'10px'}}>
                         vincent
                       </Typography>
-                      <Typography className={styles.rating}>xxxx</Typography>
+                      <Typography sx={{fontWeight:'700'}}>xxxx</Typography>
                     </div>
-                  </div>
+                  </Box>
                 </div>
-                <Typography className={styles.comment}>
+                <Typography sx={{fontWeight:'600',fontFamily:'secular one',paddingTop:'15px'}}>
                   It is an excellent course for beginners to start with. Not
                   only does it have fantastic teaching of the course material
                   but it also directs you to extra materials you can look for.
                 </Typography>
 
-                <div>
-                  <div className={styles.commentUser}>
+                <Box sx={{paddingTop:'20px'}}>
+                  <Box sx={{display:'flex',alignItems:'center',gap:'10px'}}>
                     <div className={styles.avatar}>
                       <Avatar sizes='small' sx={{ bgcolor: "#00439d" }}>
                         VI
                       </Avatar>
                     </div>
                     <div>
-                      <Typography className={styles.username}>
+                      <Typography sx={{fontSize:'18px',fontWeight:'700',paddingTop:'10px'}}>
                         vincent
                       </Typography>
-                      <Typography className={styles.rating}>xxxx</Typography>
+                      <Typography sx={{fontWeight:'700'}}>xxxx</Typography>
                     </div>
-                  </div>
-                </div>
-                <Typography className={styles.comment}>
+                  </Box>
+                </Box>
+                <Typography sx={{fontWeight:'600',fontFamily:'secular one',paddingTop:'15px'}}>
                   It is an excellent course for beginners to start with. Not
                   only does it have fantastic teaching of the course material
                   but it also directs you to extra materials you can look for.
@@ -237,7 +237,7 @@ export default function VideoPlayingPage() {
         <Grid item md={4}>
           <Container>
             <div style={{ paddingBottom: "20px" }}>
-              <Typography gutterBottom className={styles.rightTitle}>
+              <Typography gutterBottom sx={{fontFamily:'sans-serif',fontWeight:'800',fontSize:'18px'}}>
                 Course content
               </Typography>
             </div>
@@ -245,13 +245,13 @@ export default function VideoPlayingPage() {
             {course?.chapter.map((cours) => (
               <Accordion key={cours.id}>
                 <AccordionSummary expandIcon={<ExpandMore />}>
-                  <Typography className={styles.chapterTitle}>
+                  <Typography sx={{fontFamily:'sans-serif',fontWeight:'600',fontSize:'19px',textTransform:'capitalize'}}>
                     {cours.Chapter_title}
                   </Typography>
                 </AccordionSummary>
                 {cours.content.map((cont) => (
                   <AccordionDetails key={cont.id}>
-                    <div className={styles.contentTitleContainer}>
+                    <Box sx={{display:'flex',alignItems:'center',gap:'10px',height:'40px'}}>
                       <Checkbox
                         color='success'
                       ></Checkbox>
@@ -260,11 +260,11 @@ export default function VideoPlayingPage() {
                         onClick={() =>
                           handleShowVideo(cont.videoURL, course.id)
                         }
-                        className={styles.contentTitle}
+                        sx={{fontSize:'16px',fontFamily:'secular one',cursor:'pointer',textTransform:'capitalize'}}
                       >
                         {cont.title}
                       </Typography>
-                    </div>
+                    </Box>
                   </AccordionDetails>
                 ))}
               </Accordion>

@@ -9,26 +9,7 @@
 }
 
 
-.courseName{
-    font-family: SuisseWorks,Georgia,Times,'Times New Roman',serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
-    font-size: 32px;
-    line-height: 2rem;
-    font-weight: 800;
-    padding-top: 10px;
-}
-.courseDesc{
-    font-size: 16px;
-    font-weight: 400;
-    padding-top: 10px;
-    font-family: SuisseWorks,Georgia,Times,'Times New Roman',serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
-}
 
-.instructor{
-    font-family: secular one;
-    font-size: 16px;
-    font-weight: 800;
-    padding-top: 10px;
-}
 .button{
     width: 100%;
 }
