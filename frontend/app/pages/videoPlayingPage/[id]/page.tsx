@@ -251,7 +251,7 @@ export default function VideoPlayingPage() {
                 </AccordionSummary>
                 {cours.content.map((cont) => (
                   <AccordionDetails key={cont.id}>
-                    <Box sx={{display:'flex',alignItems:'center',gap:'10px',height:'40px'}}>
+                    <div className={styles.contentTitleContainer}>
                       <Checkbox
                         color='success'
                       ></Checkbox>
@@ -264,7 +264,7 @@ export default function VideoPlayingPage() {
                       >
                         {cont.title}
                       </Typography>
-                    </Box>
+                    </div>
                   </AccordionDetails>
                 ))}
               </Accordion>
