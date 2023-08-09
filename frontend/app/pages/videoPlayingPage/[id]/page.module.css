@@ -4,18 +4,8 @@
     padding-top: 20px;
     padding-bottom: 10px;
 }
-.rightTitle{
-    font-family: sans-serif;
-    font-weight: 800;
-    font-size: 18px;
 
-}
-.chapterTitle{
-    font-family: secular one;
-    font-weight: 600;
-    font-size: 19px;
-    text-transform: capitalize;
-}
+
 .contentTitleContainer{
     display: flex;
     align-items: center;
@@ -25,12 +15,7 @@
 .contentTitleContainer:hover{
     background-color: rgb(218, 215, 215);
 }
-.contentTitle{
-    font-size: 16px;
-    font-family: secular one;
-    text-transform: capitalize;
-    cursor: pointer;
-}
+
 
 .select{
     display: flex;
@@ -38,14 +23,6 @@
     padding-top: 40px;
 }
 
-.selectItem{
-    font-family: sans-serif;
-    font-size: 19px;
-    font-weight: 800;
-    text-transform: capitalize;
-    cursor: pointer;
-
-}
 
 
 
@@ -55,36 +32,10 @@
 
 
 
-.bottomReview{
-    padding-top: 30px;
-    padding-bottom: 30px;
-    
-}
-.reviewTitle{
-    text-transform: capitalize;
-    font-size: 22px;
-    font-family: sans-serif;
-    font-weight: 800;
-}
 
-.commentUser{
-    display: flex;
-    gap: 10px;
-}
-.comment{
-    font-size: 15px;
-    font-weight: 400;
-    font-family: sans-serif;
-    text-transform: capitalize;
-    padding-bottom: 30px;
-}
-.username{
-    font-size: 16px;
-    font-weight: 800;
-    font-family: sans-serif;
-    text-transform: capitalize;
-}
-.reviews{
-    padding-bottom: 30px;
-}
+
+
+
+
+
 
