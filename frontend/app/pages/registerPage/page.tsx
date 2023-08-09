@@ -133,7 +133,7 @@ export default function RegisterPage() {
             fullWidth
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            className={styles.textField}
+            sx={{paddingBottom:'16px'}}
           />
           <TextField
             required
@@ -143,7 +143,8 @@ export default function RegisterPage() {
             fullWidth
             value={email}
             onChange={(e) => setEmail(e.target.value)}
-            className={styles.textField}
+            sx={{paddingBottom:'16px'}}
+            
           />
 
           <TextField
@@ -152,7 +153,7 @@ export default function RegisterPage() {
             variant='outlined'
             type='password'
             fullWidth
-            className={styles.textField}
+            sx={{paddingBottom:'16px'}}
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
@@ -163,7 +164,8 @@ export default function RegisterPage() {
             variant='outlined'
             type='password'
             fullWidth
-            className={styles.textField}
+            sx={{paddingBottom:'16px'}}
+            
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
