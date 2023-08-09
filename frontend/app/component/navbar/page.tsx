@@ -83,8 +83,6 @@ export default function Navbar() {
     left: false,
   })
 
-
-
   const dispatch: AppDispatch = useDispatch()
   const router = useRouter()
 
@@ -93,12 +91,11 @@ export default function Navbar() {
   )
   const { user } = loginUser
 
-
-  const handleLogout = () =>{
-    if(user){
+  const handleLogout = () => {
+    if (user) {
       dispatch(logoutAction())
       dispatch(resetCourse())
-      router.push('/pages/loginPage')
+      router.push("/pages/loginPage")
     }
   }
 
@@ -168,7 +165,7 @@ export default function Navbar() {
             <ListItem disablePadding>
               <ListItemButton onClick={handleLogout}>
                 <ListItemIcon>
-                  < LogoutIcon/>
+                  <LogoutIcon />
                 </ListItemIcon>
                 <ListItemText primary='Sign out' />
               </ListItemButton>
@@ -189,7 +186,10 @@ export default function Navbar() {
   )
 
   return (
-    <AppBar position='sticky' className={styles.navbar}>
+    <AppBar
+      position='sticky'
+      sx={{ height: "70px", backgroundColor: "#393E46" }}
+    >
       <StyledToolbar>
         <RightBar>
           <Link href='/'>
@@ -207,28 +207,63 @@ export default function Navbar() {
             </Search>
           </FirstBar>
           <SecondBar>
-            <Typography className={styles.navCourse}>Courses</Typography>
-            <Link href={'/pages/dashboardPage'} style={{textDecoration:'none'}}>
-            <Typography className={styles.navCourse}>Dashboard</Typography>
+            <Typography
+              sx={{
+                fontSize: "16px",
+                fontFamily: "sexular one",
+                fontWeight: "600",
+                cursor: "pointer",
+                textAlign: "center",
+              }}
+            >
+              Courses
+            </Typography>
+            <Link
+              href={"/pages/dashboardPage"}
+              style={{ textDecoration: "none" }}
+            >
+              <Typography
+                sx={{
+                  fontSize: "16px",
+                  fontFamily: "sexular one",
+                  fontWeight: "600",
+                  cursor: "pointer",
+                  textAlign: "center",
+                  color:'#fff'
+                }}
+              >
+                Dashboard
+              </Typography>
             </Link>
 
-           
-              {user ? <>
-              <div style={{display:'flex',alignItems:'center',gap:'5px'}}>
-                <Avatar style={{width:'25px',height:'25px'}}/>
-              <Typography className={styles.navUser}>{user.username}</Typography>
-              </div>
+            {user ? (
+              <>
+                <div
+                  style={{ display: "flex", alignItems: "center", gap: "5px" }}
+                >
+                  <Avatar style={{ width: "25px", height: "25px" }} />
+                  <Typography
+                    sx={{
+                      fontSize: "16px",
+                      fontFamily: "sexular one",
+                      fontWeight: "600",
+                      cursor: "pointer",
+                      textAlign: "center",
+                    }}
+                  >
+                    {user.username}
+                  </Typography>
+                </div>
 
-              <IconButton onClick={handleLogout} style={{color:'white'}}> 
+                <IconButton onClick={handleLogout} style={{ color: "white" }}>
                   <LogoutIcon />
-              </IconButton>
-            
-              </>:
-               <Link href='/pages/loginPage'>
-              <Typography className={styles.signInLink}>Sign In</Typography>
-             </Link>
-
-          }
+                </IconButton>
+              </>
+            ) : (
+              <Link href='/pages/loginPage'>
+                <Typography sx={{fontSize:'16px',fontFamily:'sexular one',fontWeight:'600',cursor:'pointer',textAlign:'center',color:'#fff'}}>Sign In</Typography>
+              </Link>
+            )}
           </SecondBar>
           <SmallScreenRightBar>
             <IconButton onClick={toggleDrawer(true)}>
