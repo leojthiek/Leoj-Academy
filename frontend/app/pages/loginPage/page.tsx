@@ -106,7 +106,7 @@ export default function LoginPage() {
       </FirstBox>
       <SecondBox>
         <Title>
-          <Typography className={styles.pageTitle}>
+          <Typography sx={{fontSize:'1.8rem',fontWeight:'700',paddingTop:'40px',paddingLeft:'30px'}}>
             Sign in with your Account
           </Typography>
         </Title>
@@ -127,7 +127,7 @@ export default function LoginPage() {
             label='example@gmail.com'
             type='email'
             fullWidth
-            className={styles.textField}
+            sx={{paddingBottom:'16px'}}            
           />
           <Typography className={styles.label}>
             Enter your password *
@@ -135,8 +135,8 @@ export default function LoginPage() {
           <TextField
             type='password'
             fullWidth
-            className={styles.textField}
             value={password}
+            sx={{paddingBottom:'16px'}}            
             onChange={(e) => setPassword(e.target.value)}
           />
           <div className={styles.buttonContainer}>
