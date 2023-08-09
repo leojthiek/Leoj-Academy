@@ -131,7 +131,7 @@ export default function CreateCoursePage() {
         <Grid item md={10}>
           <Container>
             <div className={styles.pageTitleContainer}>
-              <Typography className={styles.pageTitle}>
+              <Typography  sx={{fontSize:'22px',fontWeight:'700',fontFamily:'sans-serif'}}>
                 Create a course -
               </Typography>
             </div>
@@ -139,7 +139,7 @@ export default function CreateCoursePage() {
               <Form onSubmit={handleSubmit}>
                 <Grid container gap={2}>
                   <Grid item md={5}>
-                    <Typography className={styles.inputTitle}>
+                    <Typography sx={{paddingBottom:'5px',fontSize:'17px',fontFamily:'sans-serif',fontWeight:'700'}}>
                       Course title
                     </Typography>
                     <TextField
@@ -155,7 +155,7 @@ export default function CreateCoursePage() {
                     />
                   </Grid>
                   <Grid item md={5}>
-                    <Typography className={styles.inputTitle}>
+                    <Typography sx={{paddingBottom:'5px',fontSize:'17px',fontFamily:'sans-serif',fontWeight:'700'}}>
                       Course Category
                     </Typography>
                     <TextField
@@ -173,7 +173,7 @@ export default function CreateCoursePage() {
                 </Grid>
                 <Grid container gap={2} style={{ paddingTop: "20px" }}>
                   <Grid item md={5}>
-                    <Typography className={styles.inputTitle}>
+                    <Typography sx={{paddingBottom:'5px',fontSize:'17px',fontFamily:'sans-serif',fontWeight:'700'}}>
                       Course Instructor
                     </Typography>
                     <TextField
@@ -189,7 +189,7 @@ export default function CreateCoursePage() {
                     />
                   </Grid>
                   <Grid item md={5}>
-                    <Typography className={styles.inputTitle}>
+                    <Typography sx={{paddingBottom:'5px',fontSize:'17px',fontFamily:'sans-serif',fontWeight:'700'}}>
                       Course Price
                     </Typography>
                     <TextField
@@ -207,7 +207,7 @@ export default function CreateCoursePage() {
                 </Grid>
                 <Grid container style={{ paddingTop: "20px" }}>
                   <Grid item md={6}>
-                    <Typography className={styles.inputTitle}>
+                    <Typography sx={{paddingBottom:'5px',fontSize:'17px',fontFamily:'sans-serif',fontWeight:'700'}}>
                       Course image
                     </Typography>
                     <TextField
@@ -224,7 +224,7 @@ export default function CreateCoursePage() {
 
                 <Grid container style={{ paddingTop: "20px" }}>
                   <Grid item md={10}>
-                    <Typography className={styles.inputTitle}>
+                    <Typography sx={{paddingBottom:'5px',fontSize:'17px',fontFamily:'sans-serif',fontWeight:'700'}}>
                       Course description
                     </Typography>
                     <TextField
