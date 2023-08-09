@@ -189,7 +189,7 @@ export default function Navbar() {
   )
 
   return (
-    <AppBar position='sticky' className={styles.navbar}>
+    <AppBar position='sticky' sx={{height:'70px',backgroundColor:'#393E46'}}>
       <StyledToolbar>
         <RightBar>
           <Link href='/'>
