@@ -33,7 +33,7 @@ initializeDataSource().then(()=>{
   app.use("/api/courses", courseRoute)
   app.use('/api/content',contentRoute)
   
-  app.listen(5000, () => console.log("server is running on port 5000"))
+  app.listen(config.port || 5001, () => console.log(`server is running on ${config.port || "5001"}`))
   
 }).catch((error)=>{
   console.log('data source initialized error',error)
