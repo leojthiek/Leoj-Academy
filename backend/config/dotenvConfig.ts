@@ -8,7 +8,10 @@ const config = {
     aws_secret_key:process.env.AWS_SECRET_KEY,
     cloudinary_cloud_name:process.env.CLOUDINARY_CLOUD_NAME,
     cloudinary_api_key:process.env.CLOUDINARY_API_KEY,
-    cloudinary_api_secret:process.env.CLOUDINARY_API_SECRET
+    cloudinary_api_secret:process.env.CLOUDINARY_API_SECRET,
+    port:process.env.PORT,
+    postgres_host:process.env.DATABASE_HOST,
+    postgres_database_password:process.env.DATABASE_PASSWORD
 }
 
 export default config
