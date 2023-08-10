@@ -5,14 +5,15 @@ import { Course } from "./entities/courseEntity"
 import { Chapters } from "./entities/ChapterEntity"
 import { Contents } from "./entities/ContentEntity"
 import { CoursePurchase } from "./entities/CoursePurchaseEntity"
+import config from "./config/dotenvConfig"
 
 export const AppDataSource = new DataSource({
     type: "postgres",
-    host: "localhost",
+    host: config.postgres_host,
     port: 5432,
-    username: "joel",
-    password: "rokiemlo",
-    database: "leoj_academy",
+    username: "postgres",
+    password: config.postgres_database_password,
+    database: "postgres",
     cache:false,
     synchronize: true,
     logging: false,
