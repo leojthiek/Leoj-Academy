@@ -24,7 +24,8 @@ interface Course {
    course_name:string,
    course_price:number,
    course_instructor:string,
-   rating:string
+   rating:string,
+   image:string
 }
 
 
@@ -68,7 +69,7 @@ export default function Home() {
                     <CardMedia
                     component='img'
                     height='140'
-                    image='/pyton.jpg'
+                    image={cours.image}
                     alt='green iguana'
                   />
                   <CardContent sx={{textTransform:'capitalize'}}>

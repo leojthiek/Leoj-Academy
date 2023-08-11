@@ -1,11 +1,11 @@
 import "reflect-metadata"
 import { DataSource } from "typeorm"
-import { User } from "./entities/UserEntity"
-import { Course } from "./entities/courseEntity"
-import { Chapters } from "./entities/ChapterEntity"
-import { Contents } from "./entities/ContentEntity"
-import { CoursePurchase } from "./entities/CoursePurchaseEntity"
 import config from "./config/dotenvConfig"
+import { User } from "./entities/UserEntity"
+import { Course } from "./entities/CourseEntity"
+import { CoursePurchase } from "./entities/CoursePurchaseEntity"
+import { Contents } from "./entities/ContentEntity"
+import { Chapters } from "./entities/ChapterEntity"
 
 export const AppDataSource = new DataSource({
     type: "postgres",
@@ -15,9 +15,9 @@ export const AppDataSource = new DataSource({
     password: config.postgres_database_password,
     database: "postgres",
     cache:false,
-    synchronize: true,
+    synchronize: false,
     logging: false,
-    entities: [User,Course,Chapters,Contents,CoursePurchase],
+    entities: [User,Course,CoursePurchase,Contents,Chapters],
     migrations: ["./backend/migrations/*.ts"],
     subscribers: [],
 })

@@ -1,6 +1,6 @@
 import { Request, Response } from "express"
 import { AppDataSource } from "../data-source"
-import { Course } from "../entities/courseEntity"
+import { Course } from "../entities/CourseEntity"
 import { User } from "../entities/UserEntity"
 import { CoursePurchase } from "../entities/CoursePurchaseEntity"
 import { Chapters } from "../entities/ChapterEntity"

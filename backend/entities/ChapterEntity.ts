@@ -12,7 +12,7 @@ import {
 } from "typeorm"
 
 import { v4 as uuid } from "uuid"
-import { Course } from "./courseEntity"
+import { Course } from "./CourseEntity"
 import { Contents } from "./ContentEntity"
 
 @Entity("chapter")
