@@ -12,8 +12,7 @@ import {
 
 import { v4 as uuid } from "uuid"
 import { User } from "./UserEntity"
-import { Course } from "./courseEntity"
-
+import { Course } from "./CourseEntity"
 @Entity("coursePurchase")
 export class CoursePurchase {
   constructor(coursePurchase: Partial<CoursePurchase>) {

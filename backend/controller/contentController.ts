@@ -2,12 +2,12 @@ import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3"
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner"
 import { Request, Response } from "express"
 import config from "../config/dotenvConfig"
-import { User } from "../entities/UserEntity"
 import { AppDataSource } from "../data-source"
+import { User } from "../entities/UserEntity"
 import { CoursePurchase } from "../entities/CoursePurchaseEntity"
-import { Contents } from "../entities/ContentEntity"
 import { Chapters } from "../entities/ChapterEntity"
 import { upload } from "../middleware/multer"
+import {Contents} from "../entities/ContentEntity"
 
 interface UserRequest extends Request {
   user?: User

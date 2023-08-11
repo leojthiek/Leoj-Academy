@@ -12,7 +12,7 @@ import {
 import { v4 as uuid } from "uuid"
 import bcrypt from "bcrypt"
 import { Exclude, instanceToPlain } from "class-transformer"
-import { Course } from "./courseEntity"
+import { Course } from "./CourseEntity"
 import { CoursePurchase } from "./CoursePurchaseEntity"
 
 @Entity("users")
