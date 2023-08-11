@@ -38,6 +38,7 @@
    "scripts": {
       "start": "ts-node backend/server.ts",
       "typeorm": "typeorm-ts-node-commonjs",
-      "dev": "nodemon --exec ts-node backend/server.ts"
+      "dev": "nodemon --exec ts-node backend/server.ts",
+      "build": "tsc && cp .env build/"
    }
 }
