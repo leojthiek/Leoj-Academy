@@ -24,7 +24,7 @@ cloudinary.config({
 })
 
 
-
+// initialised data source if not initialised 
 initializeDataSource().then(()=>{
   app.get("/", (req, res) => {
     res.send("hello server")
