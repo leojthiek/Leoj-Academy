@@ -176,7 +176,7 @@ export default function CourseDetailPage() {
         </Container>
       </Box>
       <Box>
-        <InstructorCourse />
+        <InstructorCourse  instructor={course?.course_instructor}/>
       </Box>
       <Box>
         <SimilarCourse course={course?.course_category} />

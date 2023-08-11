@@ -35,7 +35,7 @@ const Title = styled(Typography)(({ theme }) => ({
   paddingBottom: "20px",
 }))
 
-export default function InstructorCourse() {
+export default function InstructorCourse({instructor}:any) {
   const dispatch:AppDispatch= useDispatch()
   const pathname = usePathname()
   const courseId = pathname.split('/').pop()
@@ -49,17 +49,17 @@ export default function InstructorCourse() {
 
   return (
     <div className={styles.main}>
-      {course.map((cours:Course)=>(
-
      
-      <Container key={cours.id}>
+     
+      <Container>
         <Title>
-          More course by <span className={styles.instructor}>{cours.course_instructor}</span> :
+          More course by <span className={styles.instructor}>{}</span> :
         </Title>
         <Box>
           <Grid container>
-            
-            <Grid item md={3}>
+          {course.map((cours:Course)=>(
+
+            <Grid item md={3} key={cours.id}>
               <Card sx={{width:250,height:300,backgroundColor:'#f2fde4'}}>
                 <CardActionArea>
                   <CardMedia
@@ -85,11 +85,11 @@ export default function InstructorCourse() {
                 </CardActionArea>
               </Card>
             </Grid>
+       ))}
            
           </Grid>
         </Box>
       </Container>
-       ))}
     </div>
   )
 }
