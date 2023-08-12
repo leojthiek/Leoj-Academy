@@ -28,4 +28,5 @@ jobs:
     - run: npm ci
     - run: |
            echo "${{secrets.LEOJ_ACADEMY_PROD_SECRET}}" > build/.env
+    - run: pm2 restart server
 
