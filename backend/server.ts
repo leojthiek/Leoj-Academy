@@ -12,13 +12,10 @@ import config from "./config/dotenvConfig"
 const app = express()
 
 
-app.use(express.json({limit:'50mb'}))
+app.use(express.json({limit:'100mb'}))
 app.use(trim)
 
-const allowedOrigin = ['https://leoj-academy.netlify.app','http://localhost:3000']
-app.use(cors({
-  origin:allowedOrigin
-}))
+app.use(cors())
 
 
 
