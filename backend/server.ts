@@ -14,7 +14,12 @@ const app = express()
 
 app.use(express.json({limit:'50mb'}))
 app.use(trim)
-app.use(cors())
+
+const allowedOrigin = ['https://leoj-academy.netlify.app','http://localhost:3000']
+app.use(cors({
+  origin:allowedOrigin
+}))
+
 
 
 cloudinary.config({
