@@ -1,6 +1,7 @@
 "use client"
 
 import {
+  Box,
   Button,
   Card,
   CardActionArea,
@@ -14,6 +15,8 @@ import {
 import React from "react"
 import styles from "./page.module.css"
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart"
+import Rating from '@mui/material/Rating'
+import Stack from '@mui/material/Stack'
 import {  RootState } from "@/app/redux/store"
 import { useSelector } from "react-redux"
 
@@ -26,6 +29,7 @@ interface Course {
   numOfReviews: number
   rating: number
   course_category: string
+  course_image:string
 }
 
 const FirstBox = styled(Grid)(({ theme }) => ({
@@ -69,9 +73,14 @@ export default function CourseDetailCarousel() {
             <Typography className={styles.item}>
               Category : <span className={styles.span}>{course && course.course_category}</span>
             </Typography>
+            <Box sx={{display:'flex',gap:'10px',alignItems:'center'}}>
             <Typography className={styles.item}>
-              Rating : <span className={styles.span}>xxxxx(123)</span>
+              Rating : 
             </Typography>
+            <Rating defaultValue={4.5} size="small"/>
+            (345)
+            </Box>
+           
           </FirstBox>
           <SecondBox item md={4}>
             <Card sx={{ maxWidth: 345 }}>
@@ -79,7 +88,7 @@ export default function CourseDetailCarousel() {
                 <CardMedia
                   component='img'
                   height='140'
-                  image='/pyton.jpg'
+                  image={course?.course_image}
                   alt='green iguana'
                 />
                 <CardContent>

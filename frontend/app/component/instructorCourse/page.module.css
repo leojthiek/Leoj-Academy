@@ -17,12 +17,19 @@
     font-weight: 800;
     text-transform: capitalize;
 }
+
+.cardCategory{
+    font-size: .90rem;
+    font-family: anton;
+    font-weight: 800;
+    padding-top: 8px;
+    text-transform: capitalize;
+}
 .cardInstructor{
     font-size: .90rem;
     font-family: anton;
     font-weight: 800;
     color: gray;
-    padding-top: 8px;
     text-transform: capitalize;
 }
 

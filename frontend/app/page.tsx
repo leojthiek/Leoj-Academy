@@ -8,6 +8,7 @@ import {
   CardMedia,
   Container,
   Grid,
+  Rating,
   Skeleton,
   Typography,
   styled,
@@ -25,7 +26,8 @@ interface Course {
    course_price:number,
    course_instructor:string,
    rating:string,
-   course_image:string
+   course_image:string,
+   course_category:string
 }
 
 
@@ -62,7 +64,7 @@ export default function Home() {
             
             <Grid item md={3} key={cours.id}>
               <Link href={`/pages/courseDetailPage/${cours.id}`} style={{textDecoration:'none'}}>
-              <Card sx={{ maxWidth:250 , height:300,}}>
+              <Card sx={{ maxWidth:250 , height:300,backgroundColor:'#f2fde4'}}>
                 <CardActionArea>
                  
                     
@@ -73,15 +75,16 @@ export default function Home() {
                     alt='green iguana'
                   />
                   <CardContent sx={{textTransform:'capitalize'}}>
-                    <Typography sx={{lineHeight:'1.2rem',fontSize:'1rem', color:'black',fontFamily:'secular one', fontWeight:'600'}} >
+                    <Typography sx={{lineHeight:'1.2rem',fontSize:'1rem',fontFamily:'anton',fontWeight:'800',letterSpacing:'.02rem'}} >
                        {cours.course_name}
                     </Typography>
-                    <Typography sx={{fontSize:'.90rem',fontFamily:'secular one', fontWeight:'600',paddingTop:'5px'}}>
+                    <Typography sx={{fontSize:'.90rem',fontFamily:'anton', fontWeight:'800',paddingTop:'8px'}}>
+                     {cours.course_category}
+                    </Typography>
+                    <Typography sx={{fontSize:'.90rem',fontFamily:'anton', fontWeight:'800',color:'gray'}}>
                      {cours.course_instructor}
                     </Typography>
-                    <Typography className={styles.cardRating}>
-                     xxxx (345)
-                    </Typography>
+                    <Rating defaultValue={4.5} size="small"/>
                     <Typography sx={{fontWeight:'600',fontSize:'1.3rem',fontFamily:'secular one'}}>
                     &#x20B9; {cours.course_price}
                     </Typography>

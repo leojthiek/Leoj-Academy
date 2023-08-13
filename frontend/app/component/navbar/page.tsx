@@ -218,6 +218,7 @@ export default function Navbar() {
             >
               Courses
             </Typography>
+            {user ? 
             <Link
               href={"/pages/dashboardPage"}
               style={{ textDecoration: "none" }}
@@ -235,6 +236,7 @@ export default function Navbar() {
                 Dashboard
               </Typography>
             </Link>
+            : ""}
 
             {user ? (
               <>

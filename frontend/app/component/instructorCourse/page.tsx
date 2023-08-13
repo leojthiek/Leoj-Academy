@@ -8,6 +8,7 @@ import {
   CardMedia,
   Container,
   Grid,
+  Rating,
   Typography,
   styled,
 } from "@mui/material"
@@ -27,6 +28,7 @@ interface Course {
   numOfReviews: number
   rating: number
   course_category: string
+  course_image:string
 }
 
 const Title = styled(Typography)(({ theme }) => ({
@@ -53,7 +55,7 @@ export default function InstructorCourse({instructor}:any) {
      
       <Container>
         <Title>
-          More course by <span className={styles.instructor}>{}</span> :
+          More course by <span className={styles.instructor}>{instructor}</span> :
         </Title>
         <Box>
           <Grid container>
@@ -65,19 +67,20 @@ export default function InstructorCourse({instructor}:any) {
                   <CardMedia
                     component='img'
                     height='140'
-                    image='/pyton.jpg'
+                    image={cours.course_image}
                     alt='green iguana'
                   />
                   <CardContent>
                     <Typography className={styles.cardTitle}>
                       {cours.course_name}
                     </Typography>
+                    <Typography className={styles.cardCategory}>
+                      {cours.course_category}
+                    </Typography>
                     <Typography className={styles.cardInstructor}>
                     {cours.course_instructor}
                     </Typography>
-                    <Typography className={styles.cardRating}>
-                      xxxx (345)
-                    </Typography>
+                    <Rating defaultValue={4.5} size="small"/>
                     <Typography className={styles.cardPrice}>
                       &#x20B9; {cours.course_price}
                     </Typography>
