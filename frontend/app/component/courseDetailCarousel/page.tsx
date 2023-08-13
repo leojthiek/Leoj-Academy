@@ -78,7 +78,7 @@ export default function CourseDetailCarousel() {
               Rating : 
             </Typography>
             <Rating defaultValue={4.5} size="small"/>
-            (345)
+            (345) students
             </Box>
            
           </FirstBox>
