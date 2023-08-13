@@ -15,7 +15,7 @@ var typeorm_1 = require("typeorm");
 var uuid_1 = require("uuid");
 var CourseEntity_1 = require("./CourseEntity");
 var ContentEntity_1 = require("./ContentEntity");
-var Chapters = exports.Chapters = /** @class */ (function () {
+var Chapters = /** @class */ (function () {
     function Chapters(chapter) {
         Object.assign(this, chapter);
     }
@@ -65,4 +65,5 @@ var Chapters = exports.Chapters = /** @class */ (function () {
     ], Chapters);
     return Chapters;
 }());
+exports.Chapters = Chapters;
 //# sourceMappingURL=ChapterEntity.js.map

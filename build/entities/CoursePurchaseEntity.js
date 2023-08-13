@@ -15,7 +15,7 @@ var typeorm_1 = require("typeorm");
 var uuid_1 = require("uuid");
 var UserEntity_1 = require("./UserEntity");
 var CourseEntity_1 = require("./CourseEntity");
-var CoursePurchase = exports.CoursePurchase = /** @class */ (function () {
+var CoursePurchase = /** @class */ (function () {
     function CoursePurchase(coursePurchase) {
         Object.assign(this, coursePurchase);
     }
@@ -70,4 +70,5 @@ var CoursePurchase = exports.CoursePurchase = /** @class */ (function () {
     ], CoursePurchase);
     return CoursePurchase;
 }());
+exports.CoursePurchase = CoursePurchase;
 //# sourceMappingURL=CoursePurchaseEntity.js.map

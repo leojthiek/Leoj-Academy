@@ -16,7 +16,7 @@ var uuid_1 = require("uuid");
 var UserEntity_1 = require("./UserEntity");
 var ChapterEntity_1 = require("./ChapterEntity");
 var CoursePurchaseEntity_1 = require("./CoursePurchaseEntity");
-var Course = exports.Course = /** @class */ (function () {
+var Course = /** @class */ (function () {
     function Course(course) {
         Object.assign(this, course);
     }
@@ -100,4 +100,5 @@ var Course = exports.Course = /** @class */ (function () {
     ], Course);
     return Course;
 }());
+exports.Course = Course;
 //# sourceMappingURL=CourseEntity.js.map
