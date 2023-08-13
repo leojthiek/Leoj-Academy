@@ -8,6 +8,7 @@ import {
   Button,
   Container,
   Grid,
+  Rating,
   Typography,
   styled,
 } from "@mui/material"
@@ -22,7 +23,9 @@ import Link from "next/link"
 const CourseDetailCarousel = dynamic(
   () => import("@/app/component/courseDetailCarousel/page")
 )
-const CourseContent = dynamic(()=> import('@/app/component/courseContent/page'))
+const CourseContent = dynamic(
+  () => import("@/app/component/courseContent/page")
+)
 
 const InstructorCourse = dynamic(
   () => import("@/app/component/instructorCourse/page")
@@ -44,6 +47,7 @@ interface Course {
   numOfReviews: number
   rating: number
   course_category: string
+  course_image:string
   chapter: [
     {
       id: string
@@ -97,22 +101,67 @@ export default function CourseDetailPage() {
         {coursePurchase !== null && !coursePurchaseError ? (
           <Box>
             <Container>
-              <Grid container height={300} style={{paddingTop:'25px'}}>
+              <Grid container height={300} style={{ paddingTop: "25px" }}>
                 <Grid item md={5}>
                   <div>
-                  <img src='/pyton.jpg' alt='images'  width={460}/>
+                    <img src={course?.course_image} alt='images' width={460} />
                   </div>
                 </Grid>
                 <Grid item md={6}>
                   <div className={styles.mainContainer}>
-                    <Typography sx={{fontSize:'32px',fontWeight:'800',lineHeight:'2rem',fontFamily:'secular one'}}>{course?.course_name}</Typography>
-                    <Typography sx={{fontSize:'16px',fontWeight:'400',paddingTop:'10px',fontFamily:'secular one'}}>{course?.course_description}</Typography>
-                    <Typography sx={{fontSize:'16px',fontWeight:'800',paddingTop:'10px',fontFamily:'secular one'}}> Rating : <span style={{fontWeight:'400'}}>({course?.rating}) {course?.numOfReviews} students</span></Typography>
-                    <Typography sx={{fontSize:'16px',fontWeight:'800',paddingTop:'10px',fontFamily:'secular one'}}> Instructor : <span style={{fontWeight:'400'}}> {course?.course_instructor}</span> </Typography>    
+                    <Typography
+                      sx={{
+                        fontSize: "32px",
+                        fontWeight: "800",
+                        lineHeight: "2rem",
+                        fontFamily: "secular one",
+                      }}
+                    >
+                      {course?.course_name}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: "400",
+                        paddingTop: "10px",
+                        fontFamily: "secular one",
+                      }}
+                    >
+                      {course?.course_description}
+                    </Typography>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        gap: "10px",
+                        alignItems: "center",
+                        paddingTop:'10px'
+                      }}
+                    >
+                      <Typography>Rating :</Typography>
+                      <Rating defaultValue={4.5} size='small' />
+                      (345) students
+                    </Box>
+                    <Typography
+                      sx={{
+                        fontSize: "16px",
+                        fontWeight: "800",
+                        paddingTop: "10px",
+                        fontFamily: "secular one",
+                      }}
+                    >
+                      {" "}
+                      Instructor :{" "}
+                      <span style={{ fontWeight: "400" }}>
+                        {" "}
+                        {course?.course_instructor}
+                      </span>{" "}
+                    </Typography>
                   </div>
                   <div className={styles.btnContainer}>
                     <Link href={`/pages/videoPlayingPage/${course?.id}`}>
-                     <Button className={styles.button} variant="contained">Go to course</Button>
+                      <Button className={styles.button} variant='contained'>
+                        Go to course
+                      </Button>
                     </Link>
                   </div>
                 </Grid>
@@ -124,44 +173,81 @@ export default function CourseDetailPage() {
         )}
       </Box>
       <Box>
-        {coursePurchase !== null && !coursePurchaseError ?  '' : 
-        <CourseContent />
-}
+        {coursePurchase !== null && !coursePurchaseError ? (
+          ""
+        ) : (
+          <CourseContent />
+        )}
       </Box>
       <Box>
         <Container>
-          <Typography sx={{paddingTop:'30px',fontSize:'22px',fontWeight:'900',paddingBottom:'10px'}}>
+          <Typography
+            sx={{
+              paddingTop: "30px",
+              fontSize: "22px",
+              fontWeight: "900",
+              paddingBottom: "10px",
+            }}
+          >
             Review made by student on this course :
           </Typography>
           <Grid container>
             <Grid item md={6}>
-              <Box sx={{display:'flex',alignItems:'center',gap:'10px'}}>
+              <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
                 <div className={styles.avatar}>
                   <Avatar sx={{ bgcolor: "#00439d" }}>VI</Avatar>
                 </div>
                 <div>
-                  <Typography sx={{fontSize:'18px',fontWeight:'700',paddingTop:'10px'}}>vincent</Typography>
-                  <Typography sx={{fontWeight:'700'}}>xxxx</Typography>
+                  <Typography
+                    sx={{
+                      fontSize: "18px",
+                      fontWeight: "700",
+                      paddingTop: "10px",
+                    }}
+                  >
+                    vincent
+                  </Typography>
+                  <Typography sx={{ fontWeight: "700" }}>xxxx</Typography>
                 </div>
               </Box>
 
-              <Typography sx={{fontWeight:'600',fontFamily:'secular one',paddingTop:'15px'}}>
+              <Typography
+                sx={{
+                  fontWeight: "600",
+                  fontFamily: "secular one",
+                  paddingTop: "15px",
+                }}
+              >
                 It is an excellent course for beginners to start with. Not only
                 does it have fantastic teaching of the course material but it
                 also directs you to extra materials you can look for.
               </Typography>
             </Grid>
             <Grid item md={6}>
-              <Box sx={{display:'flex',alignItems:'center',gap:'10px'}}>
+              <Box sx={{ display: "flex", alignItems: "center", gap: "10px" }}>
                 <div className={styles.avatar}>
                   <Avatar sx={{ bgcolor: "#00439d" }}>TI</Avatar>
                 </div>
                 <div>
-                  <Typography sx={{fontSize:'18px',fontWeight:'700',paddingTop:'10px'}}>Tim</Typography>
-                  <Typography sx={{fontWeight:'700'}}>xxxx</Typography>
+                  <Typography
+                    sx={{
+                      fontSize: "18px",
+                      fontWeight: "700",
+                      paddingTop: "10px",
+                    }}
+                  >
+                    Tim
+                  </Typography>
+                  <Typography sx={{ fontWeight: "700" }}>xxxx</Typography>
                 </div>
               </Box>
-              <Typography  sx={{fontWeight:'600',fontFamily:'secular one',paddingTop:'15px'}}>
+              <Typography
+                sx={{
+                  fontWeight: "600",
+                  fontFamily: "secular one",
+                  paddingTop: "15px",
+                }}
+              >
                 It is an excellent course for beginners to start with. Not only
                 does it have fantastic teaching of the course material but it
                 also directs you to extra materials you can look for.
@@ -176,7 +262,7 @@ export default function CourseDetailPage() {
         </Container>
       </Box>
       <Box>
-        <InstructorCourse  instructor={course?.course_instructor}/>
+        <InstructorCourse instructor={course?.course_instructor} />
       </Box>
       <Box>
         <SimilarCourse course={course?.course_category} />
