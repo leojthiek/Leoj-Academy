@@ -15,9 +15,7 @@ const app = express()
 app.use(express.json({limit:'100mb'}))
 app.use(trim)
 
-app.use(cors({
-  origin: 'https://leoj-academy.netlify.app'
-}));
+app.use(cors());
 
 
 

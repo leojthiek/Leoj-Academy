@@ -23,7 +23,7 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     function verb(n) { return function (v) { return step([n, v]); }; }
     function step(op) {
         if (f) throw new TypeError("Generator is already executing.");
-        while (g && (g = 0, op[0] && (_ = 0)), _) try {
+        while (_) try {
             if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
             if (y = 0, t) op = [op[0] & 2, t.value];
             switch (op[0]) {
@@ -56,7 +56,7 @@ var bcrypt_1 = __importDefault(require("bcrypt"));
 var class_transformer_1 = require("class-transformer");
 var CourseEntity_1 = require("./CourseEntity");
 var CoursePurchaseEntity_1 = require("./CoursePurchaseEntity");
-var User = exports.User = /** @class */ (function () {
+var User = /** @class */ (function () {
     function User(user) {
         Object.assign(this, user);
     }
@@ -140,4 +140,5 @@ var User = exports.User = /** @class */ (function () {
     ], User);
     return User;
 }());
+exports.User = User;
 //# sourceMappingURL=UserEntity.js.map

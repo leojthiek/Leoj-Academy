@@ -14,7 +14,7 @@ var class_validator_1 = require("class-validator");
 var typeorm_1 = require("typeorm");
 var uuid_1 = require("uuid");
 var ChapterEntity_1 = require("./ChapterEntity");
-var Contents = exports.Contents = /** @class */ (function () {
+var Contents = /** @class */ (function () {
     function Contents(content) {
         Object.assign(this, content);
     }
@@ -63,4 +63,5 @@ var Contents = exports.Contents = /** @class */ (function () {
     ], Contents);
     return Contents;
 }());
+exports.Contents = Contents;
 //# sourceMappingURL=ContentEntity.js.map

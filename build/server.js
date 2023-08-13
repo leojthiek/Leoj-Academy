@@ -13,12 +13,9 @@ var userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 var contentRoutes_1 = __importDefault(require("./routes/contentRoutes"));
 var dotenvConfig_1 = __importDefault(require("./config/dotenvConfig"));
 var app = (0, express_1.default)();
-app.use(express_1.default.json({ limit: '50mb' }));
+app.use(express_1.default.json({ limit: '100mb' }));
 app.use(trim_1.default);
-var allowedOrigin = ['https://leoj-academy.netlify.app', 'http://localhost:3000'];
-app.use((0, cors_1.default)({
-    origin: allowedOrigin
-}));
+app.use((0, cors_1.default)());
 cloudinary_1.v2.config({
     cloud_name: dotenvConfig_1.default.cloudinary_cloud_name,
     api_key: dotenvConfig_1.default.cloudinary_api_key,
