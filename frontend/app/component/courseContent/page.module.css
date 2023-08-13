@@ -7,18 +7,20 @@
     padding-top: 40px;
 }
 .chapterName{
-    font-size: 18px;
+    font-size: 20px;
     font-weight: 700;
-    font-family: anton;
+    font-family:sans-serif;
 }
 
 .contentName{
     font-size: 16px;
     font-weight: 600;
-    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-family:'secular one';
+    color: black;
+    cursor: text;
 }
 .chapterContainer{
-    background-color: rgb(234, 229, 239);
+    background-color: rgb(235, 235, 230);
 }
 .videoContainer {
     position: fixed;

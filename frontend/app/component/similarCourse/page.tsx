@@ -8,6 +8,7 @@ import {
   CardMedia,
   Container,
   Grid,
+  Rating,
   Typography,
   styled,
 } from "@mui/material"
@@ -27,6 +28,7 @@ interface Course {
   numOfReviews: number
   rating: number
   course_category: string
+  course_image: string
 }
 
 const Title = styled(Typography)(({ theme }) => ({
@@ -35,20 +37,17 @@ const Title = styled(Typography)(({ theme }) => ({
   paddingBottom: "20px",
 }))
 
-
-
-
-export default function SimilarCourse({course}:any) {
+export default function SimilarCourse({ course }: any) {
   const dispatch: AppDispatch = useDispatch()
   const pathname = usePathname()
-  const courseId = pathname.split('/').pop()
+  const courseId = pathname.split("/").pop()
 
   const sameCourse = useSelector((state: RootState) => state.sameCategory)
   const { courses, error, loading } = sameCourse
 
-  React.useEffect(()=>{
+  React.useEffect(() => {
     dispatch(sameCategoryCourseAction(courseId as string))
-  },[dispatch,courseId])
+  }, [dispatch, courseId])
 
   return (
     <div className={styles.main}>
@@ -58,48 +57,45 @@ export default function SimilarCourse({course}:any) {
         <Typography>{error as string}</Typography>
       ) : (
         <Container>
-         
-              <Title>
-                Similar course on{" "}
-                <span className={styles.instructor}>
-                  {course}
-                </span>{" "}
-                :
-              </Title>
-              <Box>
-                <Grid container>
-                {courses.map((course: Course) => (
-                  <Grid item md={3} key={course.id}>
-                    <Card  sx={{ width: 250 ,height:300, backgroundColor:'#f2fde4'}}>
-                      <CardActionArea>
-                        <CardMedia
-                          component='img'
-                          height='140'
-                          image='/pyton.jpg'
-                          alt='green iguana'
-                        />
-                        <CardContent>
-                          <Typography className={styles.cardTitle}>
-                            {course.course_name}
-                          </Typography>
-                          <Typography className={styles.cardInstructor}>
-                            {course.course_instructor}
-                          </Typography>
-                          <Typography className={styles.cardRating}>
-                            xxxx (345)
-                          </Typography>
-                          <Typography className={styles.cardPrice}>
-                            &#x20B9; {course.course_price}
-                          </Typography>
-                        </CardContent>
-                      </CardActionArea>
-                    </Card>
-                  </Grid>
-          ))}
-
+          <Title>
+            Similar course on{" "}
+            <span className={styles.instructor}>{course}</span> :
+          </Title>
+          <Box>
+            <Grid container>
+              {courses.map((course: Course) => (
+                <Grid item md={3} key={course.id}>
+                  <Card
+                    sx={{ width: 250, height: 300, backgroundColor: "#f2fde4" }}
+                  >
+                    <CardActionArea>
+                      <CardMedia
+                        component='img'
+                        height='140'
+                        image={course.course_image}
+                        alt='green iguana'
+                      />
+                      <CardContent>
+                        <Typography className={styles.cardTitle}>
+                          {course.course_name}
+                        </Typography>
+                        <Typography className={styles.cardCategory}>
+                          {course.course_category}
+                        </Typography>
+                        <Typography className={styles.cardInstructor}>
+                          {course.course_instructor}
+                        </Typography>
+                        <Rating defaultValue={4.5} size='small' />
+                        <Typography className={styles.cardPrice}>
+                          &#x20B9; {course.course_price}
+                        </Typography>
+                      </CardContent>
+                    </CardActionArea>
+                  </Card>
                 </Grid>
-              </Box>
-          
+              ))}
+            </Grid>
+          </Box>
         </Container>
       )}
     </div>
