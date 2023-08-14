@@ -25,7 +25,7 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
+    - run: npm install
     - run: | 
           echo "${{secrets.LEOJ_ACADEMY_PROD_SECRET}}" > build/.env
            
