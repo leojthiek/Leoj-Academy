@@ -25,8 +25,8 @@ export default function CreateCoursePage() {
          <AdminLeftGrid/>
         </Grid>
 
-        <Grid item md={10}>
-          right
+        <Grid item md={10} sx={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+          <Typography sx={{fontFamily:'secular one', fontSize:'30px'}}>This is an admin Dashboard</Typography>
         </Grid>
       </Grid>
     </Box>
