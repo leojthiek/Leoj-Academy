@@ -21,8 +21,8 @@ import Link from "next/link"
 
 const LeftDashBoard = styled("div")(({ theme }) => ({
   minHeight: "90vh",
-  backgroundColor: "#e9ebb2",
-  color:'#1639d9'
+  backgroundColor: "#fcfad4",
+  color:'#24231e'
 }))
 
 export default function AdminLeftGrid() {
@@ -39,16 +39,18 @@ export default function AdminLeftGrid() {
                 <Container>
               <List>
                 <ListItem disablePadding>
+                <Link href={'/pages/dashboardPage'} style={{textDecoration:'none',color:'#24231e'}}>
                   <ListItemButton>
-                    <ListItemIcon style={{color:'#1639d9'}}>
+                    <ListItemIcon style={{color:'#24231e'}}>
                       <DashboardIcon />
                     </ListItemIcon>
                    <Typography sx={{fontSize:'18px',fontWeight:'600',fontFamily:'secular one'}}>Dashboard</Typography>
                   </ListItemButton>
+                  </Link>
                 </ListItem>
                 <ListItem disablePadding>
                   <ListItemButton>
-                    <ListItemIcon style={{color:'#1639d9'}}>
+                    <ListItemIcon style={{color:'#24231e'}}>
                       <PeopleAltIcon />
                     </ListItemIcon>
                    <Typography sx={{fontSize:'18px',fontWeight:'600',fontFamily:'secular one'}}>Users</Typography>
@@ -56,7 +58,7 @@ export default function AdminLeftGrid() {
                 </ListItem>
                 <ListItem disablePadding>
                   <ListItemButton>
-                    <ListItemIcon style={{color:'#1639d9'}}>
+                    <ListItemIcon style={{color:'#24231e'}}>
                       <SchoolIcon />
                     </ListItemIcon>
                    <Typography sx={{fontSize:'18px',fontWeight:'600',fontFamily:'secular one'}}>Courses</Typography>
@@ -70,10 +72,10 @@ export default function AdminLeftGrid() {
               <ListItem disablePadding>
                 <Link href={'/pages/createCoursePage'} style={{textDecoration:'none'}}>
                   <ListItemButton>
-                    <ListItemIcon style={{color:'#1639d9'}}>
+                    <ListItemIcon style={{color:'#24231e'}}>
                       <SchoolIcon />
                     </ListItemIcon>
-                   <Typography sx={{fontSize:'18px',fontWeight:'600',fontFamily:'secular one'}}>Manage Course</Typography>
+                   <Typography sx={{fontSize:'18px',fontWeight:'600',fontFamily:'secular one',color:'#24231e'}}>Manage Course</Typography>
                   </ListItemButton>
                   </Link>
                 </ListItem>
