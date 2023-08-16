@@ -207,20 +207,9 @@ export default function Navbar() {
             </Search>
           </FirstBar>
           <SecondBar>
-            <Typography
-              sx={{
-                fontSize: "16px",
-                fontFamily: "sexular one",
-                fontWeight: "600",
-                cursor: "pointer",
-                textAlign: "center",
-              }}
-            >
-              Courses
-            </Typography>
             {user ? 
             <Link
-              href={"/pages/dashboardPage"}
+              href={"/pages/createCoursePage"}
               style={{ textDecoration: "none" }}
             >
               <Typography
@@ -262,7 +251,7 @@ export default function Navbar() {
                 </IconButton>
               </>
             ) : (
-              <Link href='/pages/loginPage'>
+              <Link href='/pages/loginPage' style={{textDecoration:'none'}}>
                 <Typography sx={{fontSize:'16px',fontFamily:'sexular one',fontWeight:'600',cursor:'pointer',textAlign:'center',color:'#fff'}}>Sign In</Typography>
               </Link>
             )}

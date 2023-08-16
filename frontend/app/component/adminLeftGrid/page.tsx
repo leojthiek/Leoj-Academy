@@ -21,8 +21,8 @@ import Link from "next/link"
 
 const LeftDashBoard = styled("div")(({ theme }) => ({
   minHeight: "90vh",
-  backgroundColor: "#fcfad4",
-  color:'#24231e'
+  color:'#24231e',
+  boxShadow:'3px 0px 7px -4px rgba(0,0,0,0.35)'
 }))
 
 export default function AdminLeftGrid() {
@@ -37,34 +37,6 @@ export default function AdminLeftGrid() {
             </div>
             <div className={styles.leftMain}>
                 <Container>
-              <List>
-                <ListItem disablePadding>
-                <Link href={'/pages/dashboardPage'} style={{textDecoration:'none',color:'#24231e'}}>
-                  <ListItemButton>
-                    <ListItemIcon style={{color:'#24231e'}}>
-                      <DashboardIcon />
-                    </ListItemIcon>
-                   <Typography sx={{fontSize:'18px',fontWeight:'600',fontFamily:'secular one'}}>Dashboard</Typography>
-                  </ListItemButton>
-                  </Link>
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon style={{color:'#24231e'}}>
-                      <PeopleAltIcon />
-                    </ListItemIcon>
-                   <Typography sx={{fontSize:'18px',fontWeight:'600',fontFamily:'secular one'}}>Users</Typography>
-                  </ListItemButton>
-                </ListItem>
-                <ListItem disablePadding>
-                  <ListItemButton>
-                    <ListItemIcon style={{color:'#24231e'}}>
-                      <SchoolIcon />
-                    </ListItemIcon>
-                   <Typography sx={{fontSize:'18px',fontWeight:'600',fontFamily:'secular one'}}>Courses</Typography>
-                  </ListItemButton>
-                </ListItem>
-              </List>
               <Box sx={{paddingTop:'30px'}}>
                 <Typography sx={{fontSize:'15px',fontWeight:'600',color:'gray'}}>Controller</Typography>
               </Box>
