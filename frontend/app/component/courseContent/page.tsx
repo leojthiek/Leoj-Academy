@@ -74,11 +74,11 @@ export default function CourseContent() {
             </AccordionSummary>
             {cours.content.map((conten) => (
               <AccordionDetails key={conten.id}>
-                  <Link href={'/pages/videoPlayingPage'} style={{textDecoration:'none'}}>
+                  <div style={{textDecoration:'none'}}>
                   <Typography className={styles.contentName}>
                     {conten.title}
                   </Typography>
-                  </Link>
+                  </div>
               </AccordionDetails>
             ))}
           </Accordion>
