@@ -19,11 +19,8 @@ import { useDispatch, useSelector } from "react-redux"
 import { getTopCourseAction } from "./redux/features/courseSlice/topCourseSlice"
 import { AppDispatch, RootState } from "./redux/store"
 import Link from "next/link"
-import dynamic from "next/dynamic"
 
-const HomePageCarousel = dynamic(
-  () => import("@/app/component/homePageCarousel/page")
-)
+import HomePageCarousel from "./component/homePageCarousel/page"
 
 interface Course {
   id: string
