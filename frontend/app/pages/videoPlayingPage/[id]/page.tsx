@@ -59,8 +59,8 @@ const Title = styled(Typography)(({ theme }) => ({
 }))
 
 const VideoContainer = styled("div")(({ theme }) => ({
-  height: "600px",
-  width: "1200px",
+  maxHeight:"600px",
+  width: "100%",
   backgroundColor: "black",
 }))
 
@@ -128,11 +128,50 @@ export default function VideoPlayingPage() {
         <Title>{course?.course_name}</Title>
       </div>
       <Grid container>
-        <Grid item md={8}>
+        <Grid item md={7}>
           <VideoContainer>
-            <ReactPlayer url={url} controls width={1200} height={600} />
+            <ReactPlayer url={url} controls width="100%" height="100%" />
           </VideoContainer>
+        </Grid>
+        <Grid item md={5}>
           <Container>
+            <div style={{ paddingBottom: "20px" }}>
+              <Typography gutterBottom sx={{fontFamily:'sans-serif',fontWeight:'800',fontSize:'18px'}}>
+                Course content
+              </Typography>
+            </div>
+
+            {course?.chapter.map((cours) => (
+              <Accordion key={cours.id}>
+                <AccordionSummary expandIcon={<ExpandMore />}>
+                  <Typography sx={{fontFamily:'sans-serif',fontWeight:'600',fontSize:'19px',textTransform:'capitalize'}}>
+                    {cours.Chapter_title}
+                  </Typography>
+                </AccordionSummary>
+                {cours.content.map((cont) => (
+                  <AccordionDetails key={cont.id}>
+                    <div className={styles.contentTitleContainer}>
+                      <Checkbox
+                        color='success'
+                      ></Checkbox>
+                      <OndemandVideo />
+                      <Typography
+                        onClick={() =>
+                          handleShowVideo(cont.videoURL, course.id)
+                        }
+                        sx={{fontSize:'16px',fontFamily:'secular one',cursor:'pointer',textTransform:'capitalize'}}
+                      >
+                        {cont.title}
+                      </Typography>
+                    </div>
+                  </AccordionDetails>
+                ))}
+              </Accordion>
+            ))}
+          </Container>
+        </Grid>
+      </Grid>
+      <div style={{paddingLeft:'20px', marginTop:"50px"}}>
             <div className={styles.select}>
               <div onClick={handleClickAbout}>
                 <Typography sx={{borderBottom: about ? '2px solid black': '', fontFamily:'sans-serif',fontSize:'19px',fontWeight:'800',cursor:'pointer'}}>About</Typography>
@@ -232,46 +271,7 @@ export default function VideoPlayingPage() {
             ) : (
               ""
             )}
-          </Container>
-        </Grid>
-        <Grid item md={4}>
-          <Container>
-            <div style={{ paddingBottom: "20px" }}>
-              <Typography gutterBottom sx={{fontFamily:'sans-serif',fontWeight:'800',fontSize:'18px'}}>
-                Course content
-              </Typography>
             </div>
-
-            {course?.chapter.map((cours) => (
-              <Accordion key={cours.id}>
-                <AccordionSummary expandIcon={<ExpandMore />}>
-                  <Typography sx={{fontFamily:'sans-serif',fontWeight:'600',fontSize:'19px',textTransform:'capitalize'}}>
-                    {cours.Chapter_title}
-                  </Typography>
-                </AccordionSummary>
-                {cours.content.map((cont) => (
-                  <AccordionDetails key={cont.id}>
-                    <div className={styles.contentTitleContainer}>
-                      <Checkbox
-                        color='success'
-                      ></Checkbox>
-                      <OndemandVideo />
-                      <Typography
-                        onClick={() =>
-                          handleShowVideo(cont.videoURL, course.id)
-                        }
-                        sx={{fontSize:'16px',fontFamily:'secular one',cursor:'pointer',textTransform:'capitalize'}}
-                      >
-                        {cont.title}
-                      </Typography>
-                    </div>
-                  </AccordionDetails>
-                ))}
-              </Accordion>
-            ))}
-          </Container>
-        </Grid>
-      </Grid>
     </Box>
   )
 }

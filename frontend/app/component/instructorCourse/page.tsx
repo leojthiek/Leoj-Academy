@@ -18,6 +18,7 @@ import { useSelector,useDispatch } from "react-redux"
 import { AppDispatch, RootState } from "@/app/redux/store"
 import { getInstructorCourse } from "@/app/redux/features/courseSlice/instructorSlice"
 import { usePathname } from "next/navigation"
+import Link from "next/link"
 
 interface Course {
   id: string
@@ -62,6 +63,7 @@ export default function InstructorCourse({instructor}:any) {
           {course.map((cours:Course)=>(
 
             <Grid item md={3} key={cours.id}>
+              <Link href={`/pages/courseDetailPage/${cours.id}`} style={{textDecoration:'none'}}>
               <Card sx={{width:250,height:300,backgroundColor:'#f2fde4'}}>
                 <CardActionArea>
                   <CardMedia
@@ -87,6 +89,7 @@ export default function InstructorCourse({instructor}:any) {
                   </CardContent>
                 </CardActionArea>
               </Card>
+              </Link>
             </Grid>
        ))}
            
