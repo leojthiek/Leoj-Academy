@@ -33,6 +33,10 @@ const FirstBox = styled("div")(({ theme }) => ({
   boxShadow: "5px 4px 5px 0px rgba(0,0,0,0.64)",
   WebkitBoxShadow: "5px 4px 5px 0px rgba(0,0,0,0.64)",
   MozBoxShadow: " 5px 4px 5px 0px rgba(0,0,0,0.64)",
+
+  [theme.breakpoints.down('md')]:{
+    display:'none'
+  }
 }))
 
 const SecondBox = styled("div")(({ theme }) => ({
@@ -43,6 +47,10 @@ const SecondBox = styled("div")(({ theme }) => ({
   MozBoxShadow: " 5px 4px 5px 0px rgba(0,0,0,0.64)",
   borderTopRightRadius: "20px",
   borderEndEndRadius: "20px",
+
+  [theme.breakpoints.down('md')]:{
+    width:'100%'
+  }
 }))
 
 const Title = styled("div")(({ theme }) => ({}))
@@ -50,8 +58,15 @@ const Title = styled("div")(({ theme }) => ({}))
 const Forms = styled("form")(({ theme }) => ({
   paddingTop: "20px",
   paddingLeft: "30px",
-  width: "30rem",
+  width: "auto",
+  marginRight:'20px',
+
+  [theme.breakpoints.down('md')]:{
+    width:'auto'
+  }
 }))
+
+
 
 const Icons = styled(Box)(({ theme }) => ({
   display: "flex",
@@ -153,15 +168,11 @@ export default function LoginPage() {
           >
             OR
           </Typography>
-          <Typography style={{ textAlign: "center" }}>
-            Continue with -
-          </Typography>
-          <Icons>
-            <IconButton>
-              <Google className={styles.googleIcon} />
-            </IconButton>
-          </Icons>
+         
         </Forms>
+         <Box>
+        <Typography style={{textAlign:'center'}}>New user ? <Link style={{cursor:'pointer'}} href={'/pages/registerPage'}>Register</Link></Typography>
+        </Box>
       </SecondBox>
     </MainBox>
   )

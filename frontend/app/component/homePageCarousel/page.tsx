@@ -1,9 +1,67 @@
-import { Box, Button, Typography } from "@mui/material"
-import Image from "next/image"
+import { Box, Button, Typography, styled } from "@mui/material"
 import Link from "next/link"
 import React from "react"
 
+
+const TitleTop = styled(Typography)(({ theme }) => ({
+  fontSize: "2rem",
+  fontWeight: "900",
+  textTransform:'capitalize',
+  fontFamily:'sans-serif',
+
+  [theme.breakpoints.down('md')]:{
+    fontSize:'2rem',
+    fontWeight:'700',
+    textTransform:'capitalized',
+    fontFamily:'sans-serif',
+    paddingLeft:'20px'
+    
+  }
+}))
+
+const TitleBottom = styled(Typography)(({ theme }) => ({
+  fontSize: "1rem",
+  fontWeight: "900",
+  textTransform:'capitalize',
+  fontFamily:'sans-serif',
+
+  [theme.breakpoints.down('md')]:{
+    fontSize:'1rem',
+    fontWeight:'700',
+    textTransform:'capitalized',
+    fontFamily:'sans-serif',
+    paddingLeft:'20px'
+    
+  }
+}))
+
+const TextBox = styled(Box)(({theme})=>({
+  position:'absolute',
+  top:'18%',
+  right:'20%',
+  padding:'20px',
+  color:'white',
+  width:'600px',
+  textAlign:'center',
+
+  [theme.breakpoints.down('md')]:{
+    width:'100%',
+    position:'absolute',
+    color:'white',
+    display:'flex',
+    justifyContent:'center',
+    alignItem:'center',
+    flexDirection:'column',
+    right:'0',
+  }
+}))
+
+
+
+
+
 export default function HomePageCarousel() {
+
   return (
     <Box
       sx={{
@@ -18,38 +76,17 @@ export default function HomePageCarousel() {
         alt='home image'
         style={{ width: "100%", height: "100%", objectFit: "cover" }}
       />
-      <Box
-        sx={{
-          position: "absolute",
-          top: "18%",
-          right: "20%",
-          padding: "20px",
-          color: "white",
-          width: "600px",
-          textAlign: "center",
-        }}
+      <TextBox
       >
-        <Typography
-          sx={{
-            textTransform: "capitalize",
-            fontSize: "35px",
-            fontWeight: "900",
-            fontFamily: "sans-serif",
-          }}
+        <TitleTop
         >
           Your Learning Adventure Begins Here
-        </Typography>
-        <Typography
-          sx={{
-            textTransform: "capitalize",
-            fontSize: "16px",
-            fontWeight: "500",
-            fontFamily: "sans-serif",
-          }}
+        </TitleTop>
+        <TitleBottom
         >
           Learn, grow, and excel with our diverse range of courses designed to
           elevate your skills and knowledge
-        </Typography>
+        </TitleBottom>
         <Box
           sx={{ display: "flex", justifyContent: "center", paddingTop: "30px" }}
         >
@@ -58,7 +95,7 @@ export default function HomePageCarousel() {
 
             </Link>
         </Box>
-      </Box>
+      </TextBox>
     </Box>
   )
 }

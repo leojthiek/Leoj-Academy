@@ -69,16 +69,16 @@ export default function Home() {
               </Title>
 
               <Box>
-                <Grid container>
+                <Grid container style={{display:'flex',justifyContent:'center'}}>
                   {course.map((cours: Course) => (
-                    <Grid item md={3} key={cours.id}>
+                    <Grid item  md={3} key={cours.id} style={{marginBottom:'30px', paddingRight:'10px'}}>
                       <Link
                         href={`/pages/courseDetailPage/${cours.id}`}
                         style={{ textDecoration: "none" }}
                       >
                         <Card
                           sx={{
-                            maxWidth: 250,
+                            width:250,
                             height: 300,
                             backgroundColor: "#f2fde4",
                           }}

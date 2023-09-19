@@ -141,7 +141,7 @@ export default function Navbar() {
             <ListItemIcon>
               <SchoolIcon />
             </ListItemIcon>
-            <ListItemText primary='Courses' />
+            <ListItemText primary='Courses (No Link)' />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -149,7 +149,7 @@ export default function Navbar() {
             <ListItemIcon>
               <ShoppingCartIcon />
             </ListItemIcon>
-            <ListItemText primary='Cart' />
+            <ListItemText primary='Cart (No link)' />
           </ListItemButton>
         </ListItem>
         {user ? (
@@ -173,12 +173,14 @@ export default function Navbar() {
           </>
         ) : (
           <ListItem disablePadding>
+            <Link href={"/pages/loginPage"} style={{textDecoration:'none', color:'black'}}>
             <ListItemButton>
               <ListItemIcon>
                 <PersonIcon />
               </ListItemIcon>
               <ListItemText primary='Sign In' />
             </ListItemButton>
+            </Link>
           </ListItem>
         )}
       </List>

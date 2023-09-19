@@ -34,6 +34,10 @@ const FirstBox = styled("div")(({ theme }) => ({
   boxShadow: "5px 4px 5px 0px rgba(0,0,0,0.64)",
   WebkitBoxShadow: "5px 4px 5px 0px rgba(0,0,0,0.64)",
   MozBoxShadow: " 5px 4px 5px 0px rgba(0,0,0,0.64)",
+
+  [theme.breakpoints.down('md')]:{
+    display:'none'
+  }
 }))
 
 const SecondBox = styled("div")(({ theme }) => ({
@@ -44,6 +48,10 @@ const SecondBox = styled("div")(({ theme }) => ({
   MozBoxShadow: " 5px 4px 5px 0px rgba(0,0,0,0.64)",
   borderTopRightRadius: "20px",
   borderEndEndRadius: "20px",
+
+  [theme.breakpoints.down('md')]:{
+    width:'100%'
+  }
 }))
 
 const Title = styled("div")(({ theme }) => ({}))
@@ -51,7 +59,12 @@ const Title = styled("div")(({ theme }) => ({}))
 const Forms = styled("form")(({ theme }) => ({
   paddingTop: "14px",
   paddingLeft: "30px",
-  width: "40rem",
+  width: "auto",
+  marginRight:'20px',
+
+  [theme.breakpoints.down('md')]:{
+
+  }
 }))
 
 const Icons = styled(Box)(({ theme }) => ({
@@ -185,13 +198,13 @@ export default function RegisterPage() {
         >
           OR
         </Typography>
-        <Typography style={{ textAlign: "center" }}>Continue with -</Typography>
-        <Icons>
-          <IconButton>
-            <Google className={styles.googleIcon} />
-          </IconButton>
-        </Icons>
+        
+        
+        <Box>
+        <Typography style={{textAlign:'center'}}>Already register ? <Link style={{cursor:'pointer'}} href={'/pages/loginPage'}>Login</Link></Typography>
+      </Box>
       </SecondBox>
+      
     </MainBox>
   )
 }

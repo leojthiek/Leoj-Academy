@@ -18,6 +18,7 @@ import { AppDispatch, RootState } from "@/app/redux/store"
 import { useDispatch, useSelector } from "react-redux"
 import { sameCategoryCourseAction } from "@/app/redux/features/courseSlice/sameCategoryCourse"
 import { usePathname } from "next/navigation"
+import Link from "next/link"
 
 interface Course {
   id: string
@@ -65,6 +66,7 @@ export default function SimilarCourse({ course }: any) {
             <Grid container>
               {courses.map((course: Course) => (
                 <Grid item md={3} key={course.id}>
+                  <Link href={`/pages/courseDetailPage/${course.id}`} style={{textDecoration:'none'}}>
                   <Card
                     sx={{ width: 250, height: 300, backgroundColor: "#f2fde4" }}
                   >
@@ -92,6 +94,7 @@ export default function SimilarCourse({ course }: any) {
                       </CardContent>
                     </CardActionArea>
                   </Card>
+                  </Link>
                 </Grid>
               ))}
             </Grid>
