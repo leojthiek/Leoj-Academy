@@ -70,6 +70,14 @@ const CourseDetailContainer = styled(Box)(({ theme }) => ({
   paddingTop: "20px",
 }))
 
+const ImageContainer = styled('div')(({ theme }) => ({
+   width:'500px',
+   [theme.breakpoints.down('md')]:{
+    width:'100%',
+    paddingBottom:'20px'
+   }
+}))
+
 export default function CourseDetailPage() {
   const pathname = usePathname()
   const courseId = pathname.split("/").pop()
@@ -101,13 +109,13 @@ export default function CourseDetailPage() {
         {coursePurchase !== null && !coursePurchaseError ? (
           <Box>
             <Container>
-              <Grid container height={300} style={{ paddingTop: "25px" }}>
-                <Grid item md={5}>
-                  <div>
-                    <img src={course?.course_image} alt='images' width={460} />
-                  </div>
+              <Grid container style={{ paddingTop: "25px" }}>
+                <Grid item  xl={6} md={6}>
+                  <ImageContainer>
+                    <img src={course?.course_image} alt='images' width={"100%"} />
+                  </ImageContainer>
                 </Grid>
-                <Grid item md={6}>
+                <Grid item  xl={6} md={6}>
                   <div className={styles.mainContainer}>
                     <Typography
                       sx={{
