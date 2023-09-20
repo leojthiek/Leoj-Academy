@@ -59,7 +59,7 @@ export default function InstructorCourse({instructor}:any) {
           More course by <span className={styles.instructor}>{instructor}</span> :
         </Title>
         <Box>
-          <Grid container>
+          <Grid container gap={2}>
           {course.map((cours:Course)=>(
 
             <Grid item md={3} key={cours.id}>
